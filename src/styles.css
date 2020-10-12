@@ -1,0 +1,145 @@
+body {
+  background-color: #F2F3EE;
+  font-family: 'Montserrat', sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+nav {
+  border: solid 2px #CCCCCC;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.nav-button {
+  margin-right: 30px;
+}
+
+.search-bar {
+  border: solid 2px #CCCCCC;
+  border-radius: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 30%;
+}
+
+h2 {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+ul {
+  padding-left: 15px;
+  list-style-type: none;
+  font-size: 14px;
+}
+
+h4 {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.search-ingredient {
+  display: flex;
+  justify-content: center;
+  margin: 9%;
+  width: 80%;
+}
+
+.search-button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+main {
+  display: flex;
+}
+
+.all-recipes {
+  margin-left: 30px;
+  margin-top: 15px;
+  width: 70%;
+}
+
+h3 {
+  margin: 10px 10px 10px 20px;
+  font-size: 25px;
+}
+
+.recipe-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border: none;
+  height: 260px;
+  width: 30%;
+  margin: 20px;
+}
+
+.recipe-card:hover {
+  box-shadow: 0 0 11px rgba(33,33,33,.2);
+}
+
+.recipe-image {
+  margin: 0px;
+  height: 170px;
+  width: 100%;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  display: block;
+}
+
+.recipe-image:hover {
+  cursor: pointer;
+}
+.recipe-card-buttons {
+  flex-direction: row;
+}
+
+.pink-button {
+  background-color: #FF6666;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  font-size: 14px;
+  width: 130px;
+  padding: 7px;
+  outline: none;
+  cursor: pointer;
+}
+
+.pink-button:hover {
+  background-color: #FF3333;
+}
+
+.recipe-button-image {
+  height: 25px;
+  width: 25px;
+  background-color: none;
+  outline: none;
+  border: none;
+}
+
+.recipe-button {
+  border: none;
+  background-color: white;
+  margin: 0px 20px 20px 20px;
+}
+
+.recipe-button:hover {
+  cursor: pointer;
+}
