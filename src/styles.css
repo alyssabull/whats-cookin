@@ -1,3 +1,8 @@
+body {
+  background-color: #F2F3EE;
+  font-family: 'Montserrat', sans-serif;
+}
+
 header {
   display: flex;
   justify-content: center;
@@ -85,4 +90,10 @@ h3 {
 
 .recipe-card-buttons {
   flex-direction: row;
+}
+
+button {
+  background-color: #E7717D;
+  border: solid black 1px;
+  border-radius: 2px;
 }
