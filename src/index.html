@@ -11,10 +11,10 @@
       <h1>What's Cookin', Jordon</h1>
     </header>
     <nav>
-      <button class="nav-button">Home</button>
-      <button class="nav-button">Favorites</button>
-      <button class="nav-button">Recipes to Cook</button>
-      <button class="nav-button">Pantry</button>
+      <button class="nav-button pink-button">Home</button>
+      <button class="nav-button pink-button">Favorites</button>
+      <button class="nav-button pink-button">Recipes to Cook</button>
+      <button class="nav-button pink-button">Pantry</button>
     </nav>
     <main>
       <section class="search-bar">
@@ -22,19 +22,30 @@
           <h2>Search by Category</h2>
           <ul>
             <li><input type="radio" id="antipasti" name="category" value="antipasti">Antipasti</li>
+            <li><input type="radio" id="appetizer" name="category" value="appetizer">Appetizer</li>
+            <li><input type="radio" id="breakfast" name="category" value="breakfast">Breakfast</li>
+            <li><input type="radio" id="condiment" name="category" value="condiment">Condiment</li>
+            <li><input type="radio" id="dip" name="category" value="dip">Dip</li>
+            <li><input type="radio" id="dinner" name="category" value="dinner">Dinner</li>
+            <li><input type="radio" id="lunch" name="category" value="lunch">Lunch</li>
+            <li><input type="radio" id="main-course" name="category" value="main-course">Main Course</li>
+            <li><input type="radio" id="salad" name="category" value="salad">Salad</li>
+            <li><input type="radio" id="sauce" name="category" value="sauce">Sauce</li>
+            <li><input type="radio" id="side-dish" name="category" value="side-dish">Side Dish</li>
+            <li><input type="radio" id="spread" name="category" value="spread">Spread</li>
             <li><input type="radio" id="starter" name="category" value="starter">Starter</li>
             <li><input type="radio" id="snack" name="category" value="snack">Snack</li>
-            <li><input type="radio" id="appetizer" name="category" value="appetizer">Appetizer</li>
+
           </ul>
         </div>
-        <h4>------- OR -------</h4>
+        <h4>------- OR --------</h4>
         <div>
           <h2>Search by Ingredient</h2>
-          <div class="search-ingredient">
-            <input placeholder="type the name of an ingredient"></input>
+          <div>
+            <input class="search-ingredient" placeholder="type the name of an ingredient"></input>
           </div>
           <div class="search-button">
-            <button>SEARCH</button>
+            <button class="pink-button">SEARCH</button>
           </div>
         </div>
       </section>
@@ -42,11 +53,13 @@
         <h3>All Recipes</h3>
         <div>
           <article class="recipe-card">
-            <img src="https://spoonacular.com/recipeImages/507921-556x370.jpg" alt="cupcake" class="recipe-image">
+            <div class="view-recipe">
+              <img src="https://spoonacular.com/recipeImages/507921-556x370.jpg" alt="cupcake" class="recipe-image">
+            </div>
             <h4>Ambrosia Cupcakes</h4>
             <div class="recipe-card-buttons">
-              <button class="favorite-button">Favorite</button>
-              <button class="recipe-to-cook-button">To Cook</button>
+              <button class="recipe-button"><img src="https://image.flaticon.com/icons/png/512/14/14815.png" class="recipe-button-image"></button>
+              <button class="recipe-button"><img src ="https://img.icons8.com/ios/452/chef-hat.png" class="recipe-button-image"></button>
             </div>
           </article>
         </div>
