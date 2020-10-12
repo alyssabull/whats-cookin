@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="./styles.css">
     <meta charset="UTF-8">
     <title>What's Cookin'</title>
   </head>
@@ -9,10 +10,10 @@
       <h1>What's Cookin', Jordon</h1>
     </header>
     <nav>
-      <button class="home-button">Home</button>
-      <button class="favorites-nav-button">Favorites</button>
-      <button class="recipes-to-cook-nav-button">Recipes to Cook</button>
-      <button class="pantry-button">Pantry</button>
+      <button class="nav-button">Home</button>
+      <button class="nav-button">Favorites</button>
+      <button class="nav-button">Recipes to Cook</button>
+      <button class="nav-button">Pantry</button>
     </nav>
     <main>
       <section class="search-bar">
@@ -25,21 +26,27 @@
             <li><input type="radio" id="appetizer" name="category" value="appetizer">Appertizer</li>
           </ul>
         </div>
-        <p>------- OR -------</p>
-        <div class="search-ingredient">
+        <h4>------- OR -------</h4>
+        <div>
           <h2>Search by Ingredient</h2>
-          <input placeholder="type the name of an ingredient"></input>
+          <div class="search-ingredient">
+            <input placeholder="type the name of an ingredient"></input>
+          </div>
+          <div class="search-button">
+            <button>SEARCH</button>
+          </div>
         </div>
-        <button class="search-button">SEARCH</button>
       </section>
-      <section>
-        <h2>All Recipes</h2>
-        <div class="all-recipes">
-          <article class="">
-            <img src="https://spoonacular.com/recipeImages/507921-556x370.jpg" alt="cupcake">
+      <section class="all-recipes">
+        <h3>All Recipes</h3>
+        <div>
+          <article class="recipe-card">
+            <img src="https://spoonacular.com/recipeImages/507921-556x370.jpg" alt="cupcake" class="recipe-image">
             <h4>Ambrosia Cupcakes</h4>
-            <button class="favorite-button">Favorite</button>
-            <button class="recipe-to-cook-button">To Cook</button>
+            <div class="recipe-card-buttons">
+              <button class="favorite-button">Favorite</button>
+              <button class="recipe-to-cook-button">To Cook</button>
+            </div>
           </article>
         </div>
       </section>
