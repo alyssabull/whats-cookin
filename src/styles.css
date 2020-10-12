@@ -112,6 +112,7 @@ h3 {
 
 .pink-button {
   background-color: #FF6666;
+  color: white;
   border: none;
   border-radius: 3px;
   font-size: 14px;
@@ -122,8 +123,7 @@ h3 {
 }
 
 .pink-button:hover {
-  color: #F2F3EE;
-  font-weight: bold;
+  background-color: #FF3333;
 }
 
 .recipe-button-image {
