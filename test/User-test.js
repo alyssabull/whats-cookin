@@ -2,11 +2,16 @@ const chai = require('chai');
 const expect = chai.expect;
 
 const User = require('../src/User');
+const Recipe = require('../src/Recipe');
 
 describe('User', () => {
     let user;
     let user2;
     let pantry;
+    let recipe;
+    let recipe2;
+    let ingredients;
+    let instructions;
     
     beforeEach(() => {
         pantry = [
@@ -30,6 +35,32 @@ describe('User', () => {
                 amount: 2
             },
         ]);
+        const ingredients = [
+          {
+            "id": 22222,
+            "quantity": {
+              "amount": 15,
+              "unit": "c"
+            }
+          },
+          {
+            "id": 19302,
+            "quantity": {
+              "amount": 5,
+              "unit": "tsp"
+            }
+          }];
+        const instructions = [
+          {
+            "instruction": "Butter the bread",
+            "number": 1
+          },
+          {
+            "instruction": "Toast the buttered bread",
+            "number": 2
+          }];
+        recipe = new Recipe(123456, 'https://something.jpg', ingredients, instructions, 'Toast', ['breakfast', 'brunch']);
+        recipe2 = new Recipe(456789, 'https://something.jpg', ingredients, instructions, 'Muffins', ['breakfast', 'snack']);
     });
     
     it('should be a function', () => {
@@ -86,16 +117,24 @@ describe('User', () => {
     it('should be able to add a recipe to favorites', () => {
         expect(user.favoriteRecipes).to.deep.equal([]);
         
-        user.addToFavorites('Gross Cupcakes');
+        user.addToFavorites(recipe);
         
-        expect(user.favoriteRecipes).to.deep.equal(['Gross Cupcakes']);
+        expect(user.favoriteRecipes).to.deep.equal([recipe]);
     });
     
     it('should be able to add a recipe to recipes to cook', () => {
         expect(user.recipesToCook).to.deep.equal([]);
         
-        user.addToRecipesToCook('Yummy Cupcakes');
+        user.addToRecipesToCook(recipe2);
         
-        expect(user.recipesToCook).to.deep.equal(['Yummy Cupcakes']);
+        expect(user.recipesToCook).to.deep.equal([recipe2]);
     });
+    
+    it('should be able to filter recipes by tag', () => {
+        user.addToFavorites(recipe);
+        user.addToFavorites(recipe2);
+        expect(user.favoriteRecipes).to.deep.equal([recipe, recipe2]);
+        user.filterRecipeByTag(user.favoriteRecipes, 'brunch');
+        expect(user.filterRecipeByTag(user.favoriteRecipes, 'brunch')).to.deep.equal([recipe]);
+    })
 });

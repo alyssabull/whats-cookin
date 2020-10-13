@@ -12,6 +12,16 @@ class User {
     addToRecipesToCook(recipeName) {
         this.recipesToCook.push(recipeName);
     }
+    filterRecipeByTag(recipes, tagName) {
+//       return  recipes.forEach(recipe => {
+//           if (recipe.tags.includes(tagName)) {
+//               recipes.push(recipe);
+//           }
+//        })
+       return recipes.filter(recipe => {
+            return recipe.tags.includes(tagName);
+        })
+    }
 }
 
 module.exports = User;
