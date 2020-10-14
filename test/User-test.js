@@ -136,14 +136,26 @@ describe('User', () => {
     it('should be able to add a recipe to recipes to cook', () => {
       expect(user.recipesToCook).to.deep.equal([]);
 
-      user.addToRecipesToCook(recipe2);
+      user.toggleRecipesToCook(recipe2);
 
       expect(user.recipesToCook).to.deep.equal([recipe2]);
     });
+    
+    it('should be able to remove a recipe from recipes to cook', () => {
+      expect(user.recipesToCook).to.deep.equal([]);
+
+      user.toggleRecipesToCook(recipe2);
+
+      expect(user.recipesToCook).to.deep.equal([recipe2]);
+        
+      user.toggleRecipesToCook(recipe2);
+        
+      expect(user.recipesToCook).to.deep.equal([]);
+    });
 
     it('should be able to filter recipes by tag', () => {
-      user.addToFavorites(recipe);
-      user.addToFavorites(recipe2);
+      user.toggleFavorites(recipe);
+      user.toggleFavorites(recipe2);
 
       expect(user.favoriteRecipes).to.deep.equal([recipe, recipe2]);
 
@@ -153,8 +165,8 @@ describe('User', () => {
     });
 
     it('should be able to filter recipes by ingredient', () => {
-      user.addToFavorites(recipe);
-      user.addToFavorites(recipe2);
+      user.toggleFavorites(recipe);
+      user.toggleFavorites(recipe2);
       user.searchRecipeByIngredient(user.favoriteRecipes, 'wheat flour');
 
       expect(user.searchRecipeByIngredient(user.favoriteRecipes, 'wheat flour')).to.deep.equal([recipe, recipe2]);

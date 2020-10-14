@@ -178,6 +178,7 @@ h3 {
   border: none;
   background-color: white;
   margin: 0px 20px 20px 20px;
+  outline: none;
 }
 
 .recipe-button:hover {

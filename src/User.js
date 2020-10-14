@@ -18,10 +18,16 @@ class User {
       let recipeIndex = this.favoriteRecipes.indexOf(recipe);
       this.favoriteRecipes.splice(recipeIndex, 1);
     }
-    
   }
   toggleRecipesToCook(recipe) {
-    this.recipesToCook.push(recipe);
+    if (recipe.isToCook === false) {
+      recipe.isToCook = true;
+      this.recipesToCook.push(recipe);
+    } else if (recipe.isToCook === true) {
+      recipe.isToCook = false;
+      let recipeIndex = this.recipesToCook.indexOf(recipe);
+      this.recipesToCook.splice(recipeIndex, 1);
+    }
   }
   filterRecipeByTag(recipes, tagName) {
    return recipes.filter(recipe => {
