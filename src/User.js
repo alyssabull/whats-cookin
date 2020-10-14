@@ -17,6 +17,8 @@ class User {
             return recipe.tags.includes(tagName);
         })
     }
+
+    //filterRecipeByIngredient
 }
 
 module.exports = User;
