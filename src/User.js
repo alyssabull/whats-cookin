@@ -18,7 +18,7 @@ class User {
         })
     }
 
-    //filterRecipeByIngredient
+    //searchRecipeByIngredient
 }
 
 module.exports = User;
