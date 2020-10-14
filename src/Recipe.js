@@ -9,6 +9,8 @@ class Recipe {
         this.instructions = instructions;
         this.name = name;
         this.tags = tags;
+        this.isFavorited = false;
+        this.isToCook = false;
     }
 
     getIngredients(recipe) {

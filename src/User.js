@@ -9,11 +9,19 @@ class User {
     this.favoriteRecipes = [];
     this.recipesToCook = [];
   }
-  addToFavorites(recipeName) {
-    this.favoriteRecipes.push(recipeName);
+  toggleFavorites(recipe) {
+    if (recipe.isFavorited === false) {
+      recipe.isFavorited = true;
+      this.favoriteRecipes.push(recipe);
+    } else if (recipe.isFavorited === true) {
+      recipe.isFavorited = false;
+      let recipeIndex = this.favoriteRecipes.indexOf(recipe);
+      this.favoriteRecipes.splice(recipeIndex, 1);
+    }
+    
   }
-  addToRecipesToCook(recipeName) {
-    this.recipesToCook.push(recipeName);
+  toggleRecipesToCook(recipe) {
+    this.recipesToCook.push(recipe);
   }
   filterRecipeByTag(recipes, tagName) {
    return recipes.filter(recipe => {
