@@ -31,11 +31,51 @@ nav {
   width: 30%;
 }
 
+.tag-button {
+  padding: 0px;
+  margin: 0px;
+  border-radius: 50%;
+  outline: none;
+  border: none;
+}
+
+.tag-button:hover {
+  box-shadow: 0 0 11px #FF3333;
+}
+
+.tag-image {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.tag-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tag-name {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.spacing {
+  margin-right: 30px;
+}
+
+.spacing2 {
+  margin-right: 5px;
+}
+
 h2 {
   display: flex;
   justify-content: center;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  font-size: 20px;
 }
 
 ul {
@@ -54,8 +94,8 @@ h4 {
 .search-ingredient {
   display: flex;
   justify-content: center;
-  margin: 9%;
-  width: 80%;
+  margin: 0% 5% 3% 5%;
+  width: 88%;
 }
 
 .search-button {
@@ -85,8 +125,8 @@ h3 {
   align-items: center;
   background-color: white;
   border: none;
-  height: 260px;
-  width: 30%;
+  height: 250px;
+  width: 27%;
   margin: 20px;
 }
 
