@@ -10,11 +10,13 @@ let allRecipes = document.querySelector('.all-recipes');
 let pantryButton = document.querySelector('.pantry-button');
 let searchBar = document.querySelector('.search-bar');
 let pantryStock = document.querySelector('.pantry');
+let homeButton = document.querySelector('.home-button')
 
 // recipeCard[0].addEventListener('click', toggleFavoriteIcon);
 // redHeartButton.addEventListener('click', toggleFavoriteIcon);
 allRecipes.addEventListener('click', handleRecipeCard);
 pantryButton.addEventListener('click', displayUserPantry);
+homeButton.addEventListener('click', goHome);
 
 let user;
 let pantry;
@@ -71,7 +73,7 @@ function displayUserPantry() {
   pantry = new Pantry(user.pantry);
   pantry.getPantryItems();
   searchBar.classList.add('hidden');
-  allRecipes.innerHTML = "";
+  allRecipes.innerHTML = '';
   pantry.userPantry.forEach(ingredient => {
     let pantryInfo = `<article class="pantry-card">
         <div class="pantry-info">Ingredient: ${ingredient.name}</div>
@@ -79,4 +81,10 @@ function displayUserPantry() {
       </article>`
     pantryStock.insertAdjacentHTML('afterbegin', pantryInfo);
   })
+}
+
+function goHome() {
+  searchBar.classList.remove('hidden');
+  pantryStock.innerHTML = '';
+  displayAllRecipes();
 }
