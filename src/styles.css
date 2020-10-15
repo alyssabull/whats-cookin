@@ -204,3 +204,16 @@ h3 {
 .hidden {
   display: none;
 }
+
+.pantry-card {
+  border: solid 2px #CCCCCC;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 15px 15px 15px 0px;
+  width: 300px;
+}
+
+.pantry {
+  display: flex;
+  flex-wrap: wrap;
+}

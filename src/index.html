@@ -15,10 +15,10 @@
       <button class="nav-button pink-button">Home</button>
       <button class="nav-button pink-button">Favorites</button>
       <button class="nav-button pink-button">Recipes to Cook</button>
-      <button class="nav-button pink-button">Pantry</button>
+      <button class="nav-button pink-button pantry-button">Pantry</button>
     </nav>
     <main>
-      <section class="search-bar">
+      <section class="search-bar hidden">
         <div class="search-category">
           <h2>Search by Category</h2>
           <ul class="search-tags">
@@ -74,7 +74,7 @@
           </div>
         </div>
       </section>
-      <section class="all-recipes">
+      <section class="all-recipes hidden">
           <h3>All Recipes</h3>
           <div class="all-recipes">
             <article class="recipe-card">
@@ -87,15 +87,19 @@
                 <button class="red-heart-button hidden"><i class="fa fa-heart fa-2x"></i></button>
                 <button class="to-cook-button"><i class="fa fa-bookmark-o fa-2x"></i></button>
                 <button class="gray-cook-button hidden"><i class="fa fa-bookmark fa-2x"></i></button>
-                  <br>
               </div>
             </article>
           </div>
+      </section>
+      <section class="pantry">
       </section>
     </main>
     <script type="text/javascript" src="../data/users.js"></script>
     <script type="text/javascript" src="../data/recipes.js"></script>
     <script type="text/javascript" src="../data/ingredients.js"></script>
+    <script type="text/javascript" src="./Recipe.js"></script>
+    <script type="text/javascript" src="./Pantry.js"></script>
+    <script type="text/javascript" src="./User.js"></script>
     <script type="text/javascript" src="./scripts.js"></script>
   </body>
 </html>
