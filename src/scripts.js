@@ -34,8 +34,8 @@ function displayAllRecipes() {
             </div>
             <h4>${recipe.name}</h4>
             <div class="recipe-card-buttons">
-              <button class="heart-button">&hearts;</button>
-              <button class="to-cook-button">&#43;</button>
+              <button class="heart-button ${recipe.id}">&hearts;</button>
+              <button class="to-cook-button ${recipe.id}">&#43;</button>
                 <br>
             </div>
           </article>`
@@ -44,20 +44,32 @@ function displayAllRecipes() {
 }
 
 function toggleFavoriteIcon(event) {
-    if (event.target.className === 'heart-button') {
+    if (event.target.classList.contains('heart-button')) {
     event.target.classList.add('red-heart-button');
     event.target.classList.remove('heart-button');
-  } else if (event.target.className === 'red-heart-button') {
+    recipeData.forEach(recipe => {
+        let id = recipe.id;
+        if(event.target.classList.contains(id)) {
+            user.favoriteRecipes.push(recipe);
+        }
+    })
+  } else if (event.target.classList.contains('red-heart-button')) {
     event.target.classList.add('heart-button');
     event.target.classList.remove('red-heart-button');
   }
 }
 
 function toggleToCookIcon(event) {
-    if (event.target.className === 'to-cook-button') {
+    if (event.target.classList.contains('to-cook-button')) {
     event.target.classList.add('gray-cook-button');
     event.target.classList.remove('to-cook-button');
-  } else if (event.target.className === 'gray-cook-button') {
+    recipeData.forEach(recipe => {
+        let id = recipe.id;
+        if(event.target.classList.contains(id)) {
+            user.recipesToCook.push(recipe);
+        }
+    })
+  } else if (event.target.classList.contains('gray-cook-button')) {
     event.target.classList.add('to-cook-button');
     event.target.classList.remove('gray-cook-button');
   }
