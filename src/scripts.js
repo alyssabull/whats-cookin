@@ -8,6 +8,7 @@ let homeButton = document.querySelector('.home-button')
 
 
 allRecipes.addEventListener('click', toggleFavoriteIcon);
+allRecipes.addEventListener('click', toggleToCookIcon);
 pantryButton.addEventListener('click', displayUserPantry);
 homeButton.addEventListener('click', goHome);
 
@@ -34,9 +35,7 @@ function displayAllRecipes() {
             <h4>${recipe.name}</h4>
             <div class="recipe-card-buttons">
               <button class="heart-button">&hearts;</button>
-              <button class="red-heart-button hidden">&hearts;</button>
               <button class="to-cook-button">&#43;</button>
-              <button class="gray-cook-button hidden">&#43;</button>
                 <br>
             </div>
           </article>`
@@ -45,14 +44,22 @@ function displayAllRecipes() {
 }
 
 function toggleFavoriteIcon(event) {
-  let heartButton = document.querySelector('.heart-button');
-  let redHeartButton = document.querySelector('.red-heart-button');
     if (event.target.className === 'heart-button') {
-    heartButton.classList.add('hidden');
-    redHeartButton.classList.remove('hidden');
-  } else {
-    heartButton.classList.remove('hidden');
-    redHeartButton.classList.add('hidden');
+    event.target.classList.add('red-heart-button');
+    event.target.classList.remove('heart-button');
+  } else if (event.target.className === 'red-heart-button') {
+    event.target.classList.add('heart-button');
+    event.target.classList.remove('red-heart-button');
+  }
+}
+
+function toggleToCookIcon(event) {
+    if (event.target.className === 'to-cook-button') {
+    event.target.classList.add('gray-cook-button');
+    event.target.classList.remove('to-cook-button');
+  } else if (event.target.className === 'gray-cook-button') {
+    event.target.classList.add('to-cook-button');
+    event.target.classList.remove('gray-cook-button');
   }
 }
 
