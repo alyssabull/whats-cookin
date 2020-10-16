@@ -153,8 +153,7 @@ h3 {
 
 .recipe-name {
   height: 20%;
-  display: flex;
-  align-items: flex-start;
+  margin: 15px;
 }
 
 .recipe-image:hover {
