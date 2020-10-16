@@ -8,6 +8,10 @@ header {
   justify-content: center;
 }
 
+main {
+  margin-left: 10px;
+}
+
 h1 {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -29,6 +33,7 @@ nav {
   margin-top: 20px;
   margin-bottom: 20px;
   width: 30%;
+  height: 570px;
 }
 
 .tag-button {
@@ -88,7 +93,7 @@ h4 {
   display: flex;
   justify-content: center;
   margin-top: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 .search-ingredient {
@@ -106,6 +111,11 @@ h4 {
 
 main {
   display: flex;
+}
+
+.title {
+  width: 100%;
+  margin-bottom: 0px;
 }
 
 .all-recipes {
@@ -127,7 +137,7 @@ h3 {
   align-items: center;
   background-color: white;
   border: none;
-  height: 270px;
+  height: 290px;
   width: 25%;
   margin: 20px;
 }
@@ -170,6 +180,7 @@ h3 {
   background-color: white;
   outline: none;
   cursor: pointer;
+  font-size: 270%;
 }
 
 .red-heart-button {
@@ -178,6 +189,7 @@ h3 {
   outline: none;
   color: red;
   cursor: pointer;
+  font-size: 270%;
 }
 
 .to-cook-button {
@@ -185,6 +197,7 @@ h3 {
   background-color: white;
   outline: none;
   cursor: pointer;
+  font-size: 270%;
 }
 
 .gray-cook-button {
@@ -193,6 +206,7 @@ h3 {
   outline: none;
   color: #696969;
   cursor: pointer;
+  font-size: 270%;
 }
 
 .recipe-card-buttons {
@@ -215,5 +229,6 @@ h3 {
 
 .pantry {
   display: flex;
+  justify-content: space-around;
   flex-wrap: wrap;
 }

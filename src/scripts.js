@@ -1,20 +1,13 @@
 window.addEventListener('load', loadPage);
 
 let allRecipes = document.querySelector('.all-recipes');
-// let recipeCard = document.querySelectorAll('.recipe-card');
-// let recipeCardImage = document.querySelectorAll('.recipe-image');
-// let toCookButton = document.querySelector('.to-cook-button');
-// let grayCookButton = document.querySelector('.gray-cook-button');
-// let recipeImage = document.querySelector('.view-recipe');
-
 let pantryButton = document.querySelector('.pantry-button');
 let searchBar = document.querySelector('.search-bar');
 let pantryStock = document.querySelector('.pantry');
 let homeButton = document.querySelector('.home-button')
 
-// recipeCard[0].addEventListener('click', toggleFavoriteIcon);
-// redHeartButton.addEventListener('click', toggleFavoriteIcon);
-allRecipes.addEventListener('click', handleRecipeCard);
+
+allRecipes.addEventListener('click', toggleFavoriteIcon);
 pantryButton.addEventListener('click', displayUserPantry);
 homeButton.addEventListener('click', goHome);
 
@@ -30,14 +23,8 @@ function loadUser() {
   user = new User(usersData[0].name, usersData[0].id, usersData[0].pantry);
 }
 
-function handleRecipeCard(event) {
-  if (event.target.classList.contains('heart-button')) {
-    toggleFavoriteIcon();
-  }
-}
-
 function displayAllRecipes() {
-    allRecipes.innerHTML = '';
+    allRecipes.innerHTML = `<h3 class="title">All Recipes</h3>`;
     recipeData.forEach(recipe => {
         let recipeCard = `
           <article class="recipe-card">
@@ -46,10 +33,10 @@ function displayAllRecipes() {
             </div>
             <h4>${recipe.name}</h4>
             <div class="recipe-card-buttons">
-              <button class="heart-button"><i class="fa fa-heart-o fa-2x"></i></button>
-              <button class="red-heart-button hidden"><i class="fa fa-heart fa-2x"></i></button>
-              <button class="to-cook-button"><i class="fa fa-bookmark-o fa-2x"></i></button>
-              <button class="gray-cook-button hidden"><i class="fa fa-bookmark fa-2x"></i></button>
+              <button class="heart-button">&hearts;</button>
+              <button class="red-heart-button hidden">&hearts;</button>
+              <button class="to-cook-button">&#43;</button>
+              <button class="gray-cook-button hidden">&#43;</button>
                 <br>
             </div>
           </article>`
@@ -57,10 +44,10 @@ function displayAllRecipes() {
     })
 }
 
-function toggleFavoriteIcon() {
+function toggleFavoriteIcon(event) {
   let heartButton = document.querySelector('.heart-button');
   let redHeartButton = document.querySelector('.red-heart-button');
-  if (heartButton.classList.contains('hidden')) {
+    if (event.target.className === 'heart-button') {
     heartButton.classList.add('hidden');
     redHeartButton.classList.remove('hidden');
   } else {
@@ -73,9 +60,10 @@ function displayUserPantry() {
   pantry = new Pantry(user.pantry);
   pantry.getPantryItems();
   searchBar.classList.add('hidden');
-  allRecipes.innerHTML = '';
+  allRecipes.classList.add('hidden');
   pantry.userPantry.forEach(ingredient => {
     let pantryInfo = `<article class="pantry-card">
+        <i class ="fa fa-arrow-right"></i>
         <div class="pantry-info">Ingredient: ${ingredient.name}</div>
         <div class="pantry-info">Amount: ${ingredient.amount}</div>
       </article>`
@@ -85,6 +73,7 @@ function displayUserPantry() {
 
 function goHome() {
   searchBar.classList.remove('hidden');
+  allRecipes.classList.remove('hidden');
   pantryStock.innerHTML = '';
   displayAllRecipes();
 }
