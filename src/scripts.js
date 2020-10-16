@@ -5,6 +5,7 @@ let pantryButton = document.querySelector('.pantry-button');
 let searchBar = document.querySelector('.search-bar');
 let pantryStock = document.querySelector('.pantry');
 let homeButton = document.querySelector('.home-button')
+let header = document.querySelector('h1');
 
 
 allRecipes.addEventListener('click', toggleFavoriteIcon);
@@ -22,6 +23,7 @@ function loadPage() {
 
 function loadUser() {
   user = new User(usersData[0].name, usersData[0].id, usersData[0].pantry);
+  header.innerText = `What's Cookin', ${user.name}`;
 }
 
 function displayAllRecipes() {
@@ -32,7 +34,7 @@ function displayAllRecipes() {
             <div class="view-recipe">
               <img src=${recipe.image} class="recipe-image" id=${recipe.id}>
             </div>
-            <h4>${recipe.name}</h4>
+            <h4 class="recipe-name">${recipe.name}</h4>
             <div class="recipe-card-buttons">
               <button class="heart-button ${recipe.id}">&hearts;</button>
               <button class="to-cook-button ${recipe.id}">&#43;</button>
