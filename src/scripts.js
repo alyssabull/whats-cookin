@@ -50,12 +50,18 @@ function toggleFavoriteIcon(event) {
     recipeData.forEach(recipe => {
         let id = recipe.id;
         if(event.target.classList.contains(id)) {
-            user.favoriteRecipes.push(recipe);
+            user.addToFavorites(recipe);
         }
     })
   } else if (event.target.classList.contains('red-heart-button')) {
     event.target.classList.add('heart-button');
     event.target.classList.remove('red-heart-button');
+    recipeData.forEach(recipe => {
+        let id = recipe.id;
+        if(event.target.classList.contains(id)) {
+            user.removeFromFavorites(recipe);
+        }
+    })
   }
 }
 
@@ -66,12 +72,18 @@ function toggleToCookIcon(event) {
     recipeData.forEach(recipe => {
         let id = recipe.id;
         if(event.target.classList.contains(id)) {
-            user.recipesToCook.push(recipe);
+            user.addToRecipesToCook(recipe);
         }
     })
   } else if (event.target.classList.contains('gray-cook-button')) {
     event.target.classList.add('to-cook-button');
     event.target.classList.remove('gray-cook-button');
+    recipeData.forEach(recipe => {
+        let id = recipe.id;
+        if(event.target.classList.contains(id)) {
+            user.removeFromRecipesToCook(recipe);
+        }
+    })
   }
 }
 
