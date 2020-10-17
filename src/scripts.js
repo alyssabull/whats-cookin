@@ -117,13 +117,15 @@ function displayRecipeCard(event) {
     if (event.target.classList.contains('recipe-image')) {
         potentialRecipes.forEach(recipe => {
             let id = recipe.id;
+            recipe.getIngredients(recipe);
             if(event.target.classList.contains(id)) {
                 searchBar.classList.add('hidden');
                 allRecipes.classList.add('hidden');
+                console.log(recipe);
                 let recipeInfo = `<article class="recipe-card-page">
                     <div class="recipe-name">${recipe.name}</div>
                     <div class="recipe-page-image"><img src='${recipe.image}'></div>
-                    <div class="recipe-ingredients">${recipe.ingredients}</div>
+                    <div class="recipe-ingredients">Ingredients: ${recipe.ingredients.map(ingredient => {return ingredient.name})}</div>
                     <div class="recipe-instructions">${recipe.instructions}</div>
                     <div class="recipe-cost">Cost: $</div>
                     </article>`
