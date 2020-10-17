@@ -14,19 +14,28 @@ homeButton.addEventListener('click', goHome);
 
 let user;
 let pantry;
+let potentialRecipes = [];
 
 function loadPage() {
   loadUser();
-  displayAllRecipes();
+  loadRecipes();
 }
 
 function loadUser() {
   user = new User(usersData[0].name, usersData[0].id, usersData[0].pantry);
 }
 
+function loadRecipes() {
+    recipeData.map(recipe => {
+        let eachRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
+        potentialRecipes.push(eachRecipe);
+    })
+    displayAllRecipes();
+}
+
 function displayAllRecipes() {
     allRecipes.innerHTML = `<h3 class="title">All Recipes</h3>`;
-    recipeData.forEach(recipe => {
+    potentialRecipes.forEach(recipe => {
         let recipeCard = `
           <article class="recipe-card">
             <div class="view-recipe">
@@ -47,7 +56,7 @@ function toggleFavoriteIcon(event) {
     if (event.target.classList.contains('heart-button')) {
     event.target.classList.add('red-heart-button');
     event.target.classList.remove('heart-button');
-    recipeData.forEach(recipe => {
+    potentialRecipes.forEach(recipe => {
         let id = recipe.id;
         if(event.target.classList.contains(id)) {
             user.addToFavorites(recipe);
@@ -56,7 +65,7 @@ function toggleFavoriteIcon(event) {
   } else if (event.target.classList.contains('red-heart-button')) {
     event.target.classList.add('heart-button');
     event.target.classList.remove('red-heart-button');
-    recipeData.forEach(recipe => {
+    potentialRecipes.forEach(recipe => {
         let id = recipe.id;
         if(event.target.classList.contains(id)) {
             user.removeFromFavorites(recipe);
@@ -69,7 +78,7 @@ function toggleToCookIcon(event) {
     if (event.target.classList.contains('to-cook-button')) {
     event.target.classList.add('gray-cook-button');
     event.target.classList.remove('to-cook-button');
-    recipeData.forEach(recipe => {
+    potentialRecipes.forEach(recipe => {
         let id = recipe.id;
         if(event.target.classList.contains(id)) {
             user.addToRecipesToCook(recipe);
@@ -78,7 +87,7 @@ function toggleToCookIcon(event) {
   } else if (event.target.classList.contains('gray-cook-button')) {
     event.target.classList.add('to-cook-button');
     event.target.classList.remove('gray-cook-button');
-    recipeData.forEach(recipe => {
+    potentialRecipes.forEach(recipe => {
         let id = recipe.id;
         if(event.target.classList.contains(id)) {
             user.removeFromRecipesToCook(recipe);
