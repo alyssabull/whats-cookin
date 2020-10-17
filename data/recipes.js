@@ -822,7 +822,7 @@ const recipeData = [
         "number": 6
       }
     ],
-    "name": "Creamy Coconut Yogurt Bowl with Chocolate Granola (Video)",
+    "name": "Creamy Coconut Yogurt Bowl with Chocolate Granola",
     "tags": [
       "side dish"
     ]
@@ -2277,7 +2277,7 @@ const recipeData = [
         "number": 3
       }
     ],
-    "name": "The Ultimate Healthy Soft & Chewy Pumpkin Chocolate Chip Cookies",
+    "name": "Soft & Chewy Pumpkin Chocolate Chip Cookies",
     "tags": [
       "side dish"
     ]
@@ -2434,7 +2434,7 @@ const recipeData = [
         "number": 4
       }
     ],
-    "name": "quinoa tabbouleh",
+    "name": "Quinoa Tabbouleh",
     "tags": [
       "side dish"
     ]
@@ -3122,7 +3122,7 @@ const recipeData = [
         "number": 5
       }
     ],
-    "name": "A Cake To Warm Any Heart \u2013 Banana Split Cake",
+    "name": "Banana Split Cake",
     "tags": [
       "antipasti",
       "starter",
@@ -3477,7 +3477,7 @@ const recipeData = [
         "number": 11
       }
     ],
-    "name": "4 Cheese White Pizza",
+    "name": "Four Cheese White Pizza",
     "tags": [
       "antipasti",
       "starter",

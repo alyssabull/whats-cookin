@@ -44,10 +44,6 @@ nav {
   border: none;
 }
 
-.tag-button:hover {
-  box-shadow: 0 0 11px #FF3333;
-}
-
 .tag-image {
   height: 60px;
   width: 60px;
@@ -137,7 +133,7 @@ h3 {
   align-items: center;
   background-color: white;
   border: none;
-  height: 290px;
+  height: 310px;
   width: 25%;
   margin: 20px;
 }
@@ -155,6 +151,11 @@ h3 {
   display: block;
 }
 
+.recipe-name {
+  height: 20%;
+  margin: 15px;
+}
+
 .recipe-image:hover {
   cursor: pointer;
 }
@@ -165,14 +166,10 @@ h3 {
   border: none;
   border-radius: 3px;
   font-size: 14px;
-  width: 130px;
+  width: 150px;
   padding: 7px;
   outline: none;
   cursor: pointer;
-}
-
-.pink-button:hover {
-  background-color: #FF3333;
 }
 
 .heart-button {
@@ -231,4 +228,15 @@ h3 {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+}
+
+.grow img{
+transition: 1s ease;
+}
+
+.grow img:hover{
+-webkit-transform: scale(1.2);
+-ms-transform: scale(1.2);
+transform: scale(1.2);
+transition: 1s ease;
 }
