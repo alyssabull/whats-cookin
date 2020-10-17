@@ -125,8 +125,8 @@ function displayRecipeCard(event) {
                 let recipeInfo = `<article class="recipe-card-page">
                     <div class="recipe-name">${recipe.name}</div>
                     <div class="recipe-page-image"><img src='${recipe.image}'></div>
-                    <div class="recipe-ingredients">Ingredients: ${recipe.ingredients.map(ingredient => {return ingredient.name})}</div>
-                    <div class="recipe-instructions">${recipe.instructions}</div>
+                    <div class="recipe-ingredients">Ingredients: ${recipe.ingredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`})}</div>
+                    <div class="recipe-instructions">Instructions: ${recipe.instructions.map(instruction => {return `${instruction.number}: ${instruction.instruction}`})}</div>
                     <div class="recipe-cost">Cost: $</div>
                     </article>`
                 recipeCardPage.insertAdjacentHTML('afterbegin', recipeInfo);
