@@ -4,11 +4,13 @@ let allRecipes = document.querySelector('.all-recipes');
 let pantryButton = document.querySelector('.pantry-button');
 let searchBar = document.querySelector('.search-bar');
 let pantryStock = document.querySelector('.pantry');
-let homeButton = document.querySelector('.home-button')
+let homeButton = document.querySelector('.home-button');
+let recipeCardPage = document.querySelector('.recipe-card-page');
 
 
 allRecipes.addEventListener('click', toggleFavoriteIcon);
 allRecipes.addEventListener('click', toggleToCookIcon);
+allRecipes.addEventListener('click', displayRecipeCard);
 pantryButton.addEventListener('click', displayUserPantry);
 homeButton.addEventListener('click', goHome);
 
@@ -39,7 +41,7 @@ function displayAllRecipes() {
         let recipeCard = `
           <article class="recipe-card">
             <div class="view-recipe">
-              <img src=${recipe.image} class="recipe-image" id=${recipe.id}>
+              <img src=${recipe.image} class="recipe-image ${recipe.id}">
             </div>
             <h4>${recipe.name}</h4>
             <div class="recipe-card-buttons">
@@ -101,9 +103,9 @@ function displayUserPantry() {
   pantry.getPantryItems();
   searchBar.classList.add('hidden');
   allRecipes.classList.add('hidden');
+  recipeCardPage.innerHTML = '';
   pantry.userPantry.forEach(ingredient => {
     let pantryInfo = `<article class="pantry-card">
-        <i class ="fa fa-arrow-right"></i>
         <div class="pantry-info">Ingredient: ${ingredient.name}</div>
         <div class="pantry-info">Amount: ${ingredient.amount}</div>
       </article>`
@@ -111,9 +113,30 @@ function displayUserPantry() {
   })
 }
 
+function displayRecipeCard(event) {
+    if (event.target.classList.contains('recipe-image')) {
+        potentialRecipes.forEach(recipe => {
+            let id = recipe.id;
+            if(event.target.classList.contains(id)) {
+                searchBar.classList.add('hidden');
+                allRecipes.classList.add('hidden');
+                let recipeInfo = `<article class="recipe-card-page">
+                    <div class="recipe-name">${recipe.name}</div>
+                    <div class="recipe-page-image"><img src='${recipe.image}'></div>
+                    <div class="recipe-ingredients">${recipe.ingredients}</div>
+                    <div class="recipe-instructions">${recipe.instructions}</div>
+                    <div class="recipe-cost">Cost: $</div>
+                    </article>`
+                recipeCardPage.insertAdjacentHTML('afterbegin', recipeInfo);
+            }
+        })
+    }
+}
+
 function goHome() {
   searchBar.classList.remove('hidden');
   allRecipes.classList.remove('hidden');
   pantryStock.innerHTML = '';
+  recipeCardPage.innerHTML = '';
   displayAllRecipes();
 }
