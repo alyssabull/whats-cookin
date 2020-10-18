@@ -14,6 +14,7 @@ let pantryButton = document.querySelector('.pantry-button');
 allRecipes.addEventListener('click', toggleFavoriteIcon);
 allRecipes.addEventListener('click', toggleToCookIcon);
 allRecipes.addEventListener('click', displayRecipeCard);
+recipeCardPage.addEventListener('click', checkPantryStock);
 homeButton.addEventListener('click', goHome);
 favoritesButton.addEventListener('click', displayFavorites);
 recipesToCookButton.addEventListener('click', displayRecipesToCook);
@@ -64,6 +65,7 @@ function displayFavorites() {
     searchBar.classList.remove('hidden');
     allRecipes.classList.remove('hidden');
     pantryStock.innerHTML = '';
+    recipeCardPage.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">Favorite Recipes</h3>`;
     user.favoriteRecipes.forEach(recipe => {
         let recipeCard = `
@@ -85,6 +87,7 @@ function displayRecipesToCook() {
     searchBar.classList.remove('hidden');
     allRecipes.classList.remove('hidden');
     pantryStock.innerHTML = '';
+    recipeCardPage.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">Recipes To Cook</h3>`;
     user.recipesToCook.forEach(recipe => {
         let recipeCard = `
@@ -161,6 +164,21 @@ function displayUserPantry() {
   })
 }
 
+function checkPantryStock(event) {
+    pantry = new Pantry(user.pantry);
+    if (event.target.classList.contains('check-stock-button')) {
+        potentialRecipes.forEach(recipe => {
+            let id = recipe.id;
+            pantry.listMissingIngredients(recipe);
+            if(event.target.classList.contains(id)) {
+                let missingIngredients = `
+                    <div>Missing Ingredients: ${recipe.ingredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`})}</div>`
+                recipeCardPage.insertAdjacentHTML('beforeend', missingIngredients);
+            }
+        })
+    }
+}
+
 function displayRecipeCard(event) {
     if (event.target.classList.contains('recipe-image')) {
         potentialRecipes.forEach(recipe => {
@@ -169,13 +187,13 @@ function displayRecipeCard(event) {
             if(event.target.classList.contains(id)) {
                 searchBar.classList.add('hidden');
                 allRecipes.classList.add('hidden');
-                console.log(recipe);
                 let recipeInfo = `<article class="recipe-card-page">
                     <div class="recipe-name">${recipe.name}</div>
                     <div class="recipe-page-image"><img src='${recipe.image}'></div>
                     <div class="recipe-ingredients">Ingredients: ${recipe.ingredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`})}</div>
                     <div class="recipe-instructions">Instructions: ${recipe.instructions.map(instruction => {return `${instruction.number}: ${instruction.instruction}`})}</div>
                     <div class="recipe-cost">Cost: $</div>
+                    <button class="check-stock-button pink-button ${recipe.id}">Check Pantry Stock</button>
                     </article>`
                 recipeCardPage.insertAdjacentHTML('afterbegin', recipeInfo);
             }
