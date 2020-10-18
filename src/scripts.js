@@ -1,18 +1,24 @@
 window.addEventListener('load', loadPage);
 
 let allRecipes = document.querySelector('.all-recipes');
-let pantryButton = document.querySelector('.pantry-button');
 let searchBar = document.querySelector('.search-bar');
 let pantryStock = document.querySelector('.pantry');
-let homeButton = document.querySelector('.home-button');
 let recipeCardPage = document.querySelector('.recipe-card-page');
+let homeButton = document.querySelector('.home-button');
+let favoritesButton = document.querySelector('.favorites-button');
+let recipesToCookButton = document.querySelector('.recipes-to-cook-button');
+let pantryButton = document.querySelector('.pantry-button');
+
 
 
 allRecipes.addEventListener('click', toggleFavoriteIcon);
 allRecipes.addEventListener('click', toggleToCookIcon);
 allRecipes.addEventListener('click', displayRecipeCard);
-pantryButton.addEventListener('click', displayUserPantry);
 homeButton.addEventListener('click', goHome);
+favoritesButton.addEventListener('click', displayFavorites);
+recipesToCookButton.addEventListener('click', displayRecipesToCook);
+pantryButton.addEventListener('click', displayUserPantry);
+
 
 let user;
 let pantry;
@@ -47,6 +53,48 @@ function displayAllRecipes() {
             <div class="recipe-card-buttons">
               <button class="heart-button ${recipe.id}">&hearts;</button>
               <button class="to-cook-button ${recipe.id}">&#43;</button>
+                <br>
+            </div>
+          </article>`
+    allRecipes.insertAdjacentHTML('beforeend', recipeCard);
+    })
+}
+
+function displayFavorites() {
+    searchBar.classList.remove('hidden');
+    allRecipes.classList.remove('hidden');
+    pantryStock.innerHTML = '';
+    allRecipes.innerHTML = `<h3 class="title">Favorite Recipes</h3>`;
+    user.favoriteRecipes.forEach(recipe => {
+        let recipeCard = `
+          <article class="recipe-card">
+            <div class="view-recipe">
+              <img src=${recipe.image} class="recipe-image ${recipe.id}">
+            </div>
+            <h4>${recipe.name}</h4>
+            <div class="recipe-card-buttons">
+              <button class="to-cook-button ${recipe.id}">&#43;</button>
+                <br>
+            </div>
+          </article>`
+    allRecipes.insertAdjacentHTML('beforeend', recipeCard);
+    })
+}
+
+function displayRecipesToCook() {
+    searchBar.classList.remove('hidden');
+    allRecipes.classList.remove('hidden');
+    pantryStock.innerHTML = '';
+    allRecipes.innerHTML = `<h3 class="title">Recipes To Cook</h3>`;
+    user.recipesToCook.forEach(recipe => {
+        let recipeCard = `
+          <article class="recipe-card">
+            <div class="view-recipe">
+              <img src=${recipe.image} class="recipe-image ${recipe.id}">
+            </div>
+            <h4>${recipe.name}</h4>
+            <div class="recipe-card-buttons">
+              <button class="heart-button ${recipe.id}">&hearts;</button>
                 <br>
             </div>
           </article>`
