@@ -29,8 +29,8 @@ let potentialRecipes = [];
 
 function loadPage() {
   loadUser();
-  loadRecipeOfTheDay();
   loadRecipes();
+  loadRecipeOfTheDay();
 }
 
 function loadUser() {
@@ -39,19 +39,19 @@ function loadUser() {
   header.innerText = `What's Cookin', ${user.name}`;
 }
 
-function loadRecipeOfTheDay() {
-  let randomIndex = Math.floor(Math.random() * 50);
-  let randomRecipe = `<img src="${potentialRecipes[randomIndex].image}" class="daily-recipe-image">
-  <p class="recipe-of-day"><span class="recipe-title">Recipe of the Day | </span> ${potentialRecipes[randomIndex].name}</p>`
-  dailyRecipe.insertAdjacentHTML('afterbegin', randomRecipe);
-}
-
 function loadRecipes() {
     recipeData.map(recipe => {
         let eachRecipe = new Recipe(recipe.id, recipe.image, recipe.ingredients, recipe.instructions, recipe.name, recipe.tags);
         potentialRecipes.push(eachRecipe);
     })
     displayAllRecipes();
+}
+
+function loadRecipeOfTheDay() {
+  let randomIndex = Math.floor(Math.random() * 50);
+  let randomRecipe = `<img src="${potentialRecipes[randomIndex].image}" class="daily-recipe-image">
+  <p class="recipe-of-day"><span class="recipe-title">Recipe of the Day | </span> ${potentialRecipes[randomIndex].name}</p>`
+  dailyRecipe.insertAdjacentHTML('afterbegin', randomRecipe);
 }
 
 function displayAllRecipes() {
@@ -65,7 +65,7 @@ function displayAllRecipes() {
               </div>
               <h4 class="recipe-name">${recipe.name}</h4>
               <div class="recipe-card-buttons">
-              <img src="../assets/heart-icon-red.jpg" class="heart-button ${recipe.id}">
+              <img src="../assets/red-heart-icon.jpg" class="heart-button ${recipe.id}">
               <img src="../assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
                   <br>
               </div>
@@ -105,6 +105,7 @@ function displayAllRecipes() {
 
 function displayRecipeCard(event) {
     if (event.target.classList.contains('recipe-image')) {
+      dailyRecipe.classList.add('hidden');
         potentialRecipes.forEach(recipe => {
             let id = recipe.id;
             recipe.getIngredients(recipe);
@@ -128,6 +129,7 @@ function displayRecipeCard(event) {
 
 function displayFavorites() {
   pantryStock.innerHTML = '';
+  recipeCardPage.innerHTML = '';
   allRecipes.classList.remove('hidden');
   allRecipes.innerHTML = `<h3 class="title">Favorite Recipes</h3>`;
   dailyRecipe.classList.add('hidden');
@@ -180,7 +182,7 @@ function displayRecipesToCook() {
 
 function toggleFavoriteIcon(event) {
     if (event.target.classList.contains('heart-button')) {
-    event.target.src = "../assets/heart-icon-red.jpg";
+    event.target.src = "../assets/red-heart-icon.jpg";
     event.target.classList.add('red-heart-button');
     event.target.classList.remove('heart-button');
     potentialRecipes.forEach(recipe => {
@@ -286,8 +288,6 @@ function displayRecipesToCook() {
             <div>
             <img src="../assets/heart-regular.svg" class="heart-button">
             <button>REMOVE</button>
-            <button>Check Pantry Stock</button>
-                <br>
             </div>
           </article>`
     allRecipes.insertAdjacentHTML('beforeend', recipeCard);
