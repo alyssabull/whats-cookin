@@ -61,6 +61,9 @@ function displayAllRecipes() {
 }
 
 function displayFavorites() {
+    searchBar.classList.remove('hidden');
+    allRecipes.classList.remove('hidden');
+    pantryStock.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">Favorite Recipes</h3>`;
     user.favoriteRecipes.forEach(recipe => {
         let recipeCard = `
@@ -79,6 +82,9 @@ function displayFavorites() {
 }
 
 function displayRecipesToCook() {
+    searchBar.classList.remove('hidden');
+    allRecipes.classList.remove('hidden');
+    pantryStock.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">Recipes To Cook</h3>`;
     user.recipesToCook.forEach(recipe => {
         let recipeCard = `
