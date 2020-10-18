@@ -103,6 +103,29 @@ function displayAllRecipes() {
     })
 }
 
+function displayRecipeCard(event) {
+    if (event.target.classList.contains('recipe-image')) {
+        potentialRecipes.forEach(recipe => {
+            let id = recipe.id;
+            recipe.getIngredients(recipe);
+            if(event.target.classList.contains(id)) {
+                searchBar.classList.add('hidden');
+                allRecipes.classList.add('hidden');
+                let recipeInfo = `<article class="recipe-card-page">
+                    <div class="recipe-name">${recipe.name}</div>
+                    <div class="recipe-page-image"><img src='${recipe.image}'></div>
+                    <div class="recipe-ingredients">Ingredients: ${recipe.ingredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`})}</div>
+                    <div class="recipe-instructions">Instructions: ${recipe.instructions.map(instruction => {return `${instruction.number}: ${instruction.instruction}`})}</div>
+                    <div class="recipe-cost">Cost: $</div>
+                    <button class="check-stock-button pink-button ${recipe.id}">Check Pantry Stock</button>
+                    </article>`
+                recipeCardPage.insertAdjacentHTML('afterbegin', recipeInfo);
+            }
+        })
+    }
+}
+
+
 function displayFavorites() {
   pantryStock.innerHTML = '';
   allRecipes.classList.remove('hidden');
