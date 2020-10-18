@@ -263,6 +263,8 @@ h3 {
   cursor: pointer;
   height: 22px;
   width: 22px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .recipe-card-buttons {
@@ -281,7 +283,7 @@ h3 {
   border-radius: 10px;
   padding: 12px;
   margin: 15px 15px 15px 0px;
-  width: 330px;
+  width: 350px;
   display: flex;
 }
 
@@ -299,7 +301,7 @@ h3 {
 
 .pantry-box {
   height: 40px;
-  width: 40px;
+  width: 10px;
   border-radius: 3px;
   margin-top: 3px;
   background-color: red;
@@ -346,4 +348,37 @@ transition: 1s ease;
 
 .inactive:hover {
   background-color: gray;
+}
+
+.recipe-card-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recipe-card-name {
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.recipe-info-image {
+  height: 45%;
+  width: 45%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.recipe-information {
+  display: flex;
+  flex-direction: row;
+}
+
+.recipe-ingredients {
+  width: 20%;
+  margin-left: 50px;
+}
+
+.recipe-instructions {
+  width: 80%;
 }
