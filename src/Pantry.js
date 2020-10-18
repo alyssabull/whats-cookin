@@ -4,6 +4,7 @@
 class Pantry {
   constructor(userPantry) {
     this.userPantry = userPantry;
+    this.missingIngredients = [];
   }
   getPantryItems() {
     console.log(this.userPantry);
@@ -17,16 +18,24 @@ class Pantry {
     })
     return this.userPantry;
   }
-    checkStock(recipe) {
+  checkStock(recipe) {
+    this.missingIngredients = [];
     recipe.ingredients.forEach(ingredient => {
       const id = ingredient.id;
-        this.userPantry.forEach(pantryIngredient => {
-          if (pantryIngredient.ingredient === id) {
-            recipe.ingredients.splice(ingredient, 1);
+          if (!this.missingIngredients.includes(ingredient)) {
+            return this.missingIngredients.push(ingredient);
           }
-        })
     })
-    return recipe.ingredients;
+    this.userPantry.forEach(pantryIngredient => {
+        let id = pantryIngredient.ingredient;
+        this.missingIngredients.forEach(ingredient => {
+            if (id === ingredient.id) {
+                let ingredientIndex = this.missingIngredients.indexOf(ingredient);
+                return this.missingIngredients.splice(ingredientIndex, 1);
+            }
+        })
+    }) 
+      return this.missingIngredients;
   }
   listMissingIngredients(recipe) {
     this.checkStock(recipe);

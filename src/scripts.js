@@ -169,11 +169,11 @@ function checkPantryStock(event) {
     if (event.target.classList.contains('check-stock-button')) {
         potentialRecipes.forEach(recipe => {
             let id = recipe.id;
-            pantry.listMissingIngredients(recipe);
             if(event.target.classList.contains(id)) {
-                let missingIngredients = `
-                    <div>Missing Ingredients: ${recipe.ingredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`})}</div>`
-                recipeCardPage.insertAdjacentHTML('beforeend', missingIngredients);
+                pantry.checkStock(recipe);
+                let missingIngredientsList = `
+                    <div>Missing Ingredients: ${pantry.missingIngredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`})}</div>`
+                recipeCardPage.insertAdjacentHTML('beforeend', missingIngredientsList);
             }
         })
     }
