@@ -113,8 +113,8 @@ function displayRecipeCard(event) {
                 searchBar.classList.add('hidden');
                 allRecipes.classList.add('hidden');
                 let recipeInfo = `<div class="recipe-card-page">
-                    <div class="recipe-card-name">${recipe.name}</div>
                     <img src='${recipe.image}' class="recipe-info-image">
+                    <div class="recipe-card-name">${recipe.name}</div>
                     <div class="recipe-information">
                     <div class="recipe-ingredients">Ingredients: <ul>
                      ${recipe.ingredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`+ "<br />"})}
@@ -270,7 +270,7 @@ function checkPantryStock(event) {
             if(event.target.classList.contains(id)) {
                 pantry.checkStock(recipe);
                 let missingIngredientsList = `
-                    <div>Missing Ingredients:<br> ${pantry.missingIngredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`+ "<br />"})}</div>`
+                    <div>Missing Ingredients:<br> <ul> ${pantry.missingIngredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`+ "<br />"})}</ul></div>`
                 recipeCardPage.insertAdjacentHTML('beforeend', missingIngredientsList);
             }
         })

@@ -360,13 +360,14 @@ transition: 1s ease;
   font-size: 25px;
   font-weight: bold;
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .recipe-info-image {
   height: 45%;
   width: 45%;
   margin-top: 20px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 .recipe-information {
