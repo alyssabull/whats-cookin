@@ -65,7 +65,7 @@ function displayAllRecipes() {
               </div>
               <h4 class="recipe-name">${recipe.name}</h4>
               <div class="recipe-card-buttons">
-              <img src="../assets/red-heart-icon.jpg" class="heart-button ${recipe.id}">
+              <img src="../assets/red-heart-icon.jpg" class="red-heart-button ${recipe.id}">
               <img src="../assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
                   <br>
               </div>
@@ -119,7 +119,9 @@ function displayRecipeCard(event) {
                     <div class="recipe-ingredients">Ingredients: <ul>
                      ${recipe.ingredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`+ "<br />"})}
                     </ul>
-                    <div class="recipe-cost">Cost: $</div>
+                    <div class="recipe-cost">Cost: $${recipe.ingredients.reduce((totalCost, currentIngredient) => {
+                        return totalCost += currentIngredient.cost;
+                    }, 0)}</div>
                     </div>
                     <div class="recipe-instructions">Instructions: <ul> ${recipe.instructions.map(instruction => {return `${instruction.number}: ${instruction.instruction}`+ "<br />"})}</ul></div>
                     </div>
@@ -279,6 +281,7 @@ function checkPantryStock(event) {
 
 function displayRecipesToCook() {
   pantryStock.innerHTML = '';
+  recipeCardPage.innerHTML = '';
   allRecipes.classList.remove('hidden');
   allRecipes.innerHTML = `<h3 class="title">Recipes to Cook</h3>`;
   recipesToCookButton.classList.add('inactive');
@@ -291,7 +294,7 @@ function displayRecipesToCook() {
         let recipeCard = `
           <article class="recipe-card">
             <div class="view-recipe">
-              <img src=${recipe.image} class="recipe-image">
+              <img src=${recipe.image} class="recipe-image ${recipe.id}">
             </div>
             <h4 class="recipe-name">${recipe.name}</h4>
             <div>

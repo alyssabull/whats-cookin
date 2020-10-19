@@ -8,8 +8,6 @@ class Recipe {
         this.instructions = instructions;
         this.name = name;
         this.tags = tags;
-        this.isFavorited = false;
-        this.isToCook = false;
     }
 
     getIngredients(recipe) {
@@ -18,6 +16,9 @@ class Recipe {
         ingredientsData.forEach(ingredientData => {
           if (ingredientData.id === id) {
             ingredient.name = ingredientData.name;
+            ingredient.cost = ingredientData.estimatedCostInCents / 100;
+            ((ingredient.cost /100) * 100);
+            Math.round(ingredient.cost);
           }
         })
       })
