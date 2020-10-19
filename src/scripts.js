@@ -315,6 +315,7 @@ function goHome() {
   pantryButton.classList.remove('hidden');
   recipesToCookButton.classList.remove('hidden');
   favoritesButton.classList.remove('inactive');
+  recipesToCookButton.classList.remove('inactive');
   recipeCardPage.innerHTML = '';
   pantryStock.innerHTML = '';
   displayAllRecipes();
