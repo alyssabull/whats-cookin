@@ -360,6 +360,7 @@ function displayIngredientSearch(formValue) {
     allRecipes.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">${formValue} Recipes</h3>`;
     let filteredRecipes = user.searchRecipeByIngredient(potentialRecipes, formValue);
+    console.log(filteredRecipes);
     filteredRecipes.forEach(recipe => {
       let recipeCard = `
         <article class="recipe-card">
