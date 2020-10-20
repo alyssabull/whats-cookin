@@ -324,20 +324,32 @@ function goHome() {
 }
 
 function getFormValue() {
-  if (document.getElementById('search-recipes').elements['tag-button'].value) {
+  if (document.getElementById('search-recipes').elements['tag-button'].value && favoritesButton.classList.contains('inactive')) {
     let value = document.getElementById('search-recipes').elements['tag-button'].value
-    displayTagSearch(value);
+    displayTagSearch(value, user.favoriteRecipes);
+  } else if (document.getElementById('search-recipes').elements['form-search'].value && favoritesButton.classList.contains('inactive')) {
+    let value = document.getElementById('search-recipes').elements['form-search'].value
+    displayIngredientSearch(value, user.favoriteRecipes);
+  } else if (document.getElementById('search-recipes').elements['tag-button'].value && recipesToCookButton.classList.contains('inactive')) {
+    let value = document.getElementById('search-recipes').elements['tag-button'].value
+    displayTagSearch(value, user.recipesToCook);
+  } else if (document.getElementById('search-recipes').elements['form-search'].value && recipesToCookButton.classList.contains('inactive')) {
+    let value = document.getElementById('search-recipes').elements['form-search'].value
+    displayIngredientSearch(value, user.recipesToCook);
+  } else if (document.getElementById('search-recipes').elements['tag-button'].value) {
+    let value = document.getElementById('search-recipes').elements['tag-button'].value
+    displayTagSearch(value, potentialRecipes);
   } else if (document.getElementById('search-recipes').elements['form-search'].value) {
     let value = document.getElementById('search-recipes').elements['form-search'].value
-    displayIngredientSearch(value);
+    displayIngredientSearch(value, potentialRecipes);
   }
 }
 
-function displayTagSearch(formValue) {
+function displayTagSearch(formValue, recipesArray) {
     event.preventDefault();
     allRecipes.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">${formValue} Recipes</h3>`;
-    let filteredRecipes = user.filterRecipeByTag(potentialRecipes, formValue);
+    let filteredRecipes = user.filterRecipeByTag(recipesArray, formValue);
     filteredRecipes.forEach(recipe => {
       let recipeCard = `
         <article class="recipe-card">
@@ -355,11 +367,11 @@ function displayTagSearch(formValue) {
     })
 }
 
-function displayIngredientSearch(formValue) {
+function displayIngredientSearch(formValue, recipesArray) {
     event.preventDefault();
     allRecipes.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">${formValue} Recipes</h3>`;
-    let filteredRecipes = user.searchRecipeByIngredient(potentialRecipes, formValue);
+    let filteredRecipes = user.searchRecipeByIngredient(recipesArray, formValue);
     console.log(filteredRecipes);
     filteredRecipes.forEach(recipe => {
       let recipeCard = `
