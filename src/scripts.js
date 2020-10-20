@@ -13,7 +13,6 @@ let favoritesButton = document.querySelector('.favorites-button');
 let recipesToCookButton = document.querySelector('.recipes-to-cook-button');
 let usersButton = document.querySelector('.users-button');
 let searchButton = document.querySelector('.search-button');
-let antipasti = document.querySelector('#antipasti');
 
 allRecipes.addEventListener('click', toggleFavoriteIcon);
 allRecipes.addEventListener('click', toggleToCookIcon);
@@ -335,6 +334,7 @@ function getFormValue() {
 }
 
 function displayTagSearch(formValue) {
+    event.preventDefault();
     allRecipes.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">${formValue} Recipes</h3>`;
     let filteredRecipes = user.filterRecipeByTag(potentialRecipes, formValue);
@@ -356,6 +356,7 @@ function displayTagSearch(formValue) {
 }
 
 function displayIngredientSearch(formValue) {
+    event.preventDefault();
     allRecipes.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">${formValue} Recipes</h3>`;
     let filteredRecipes = user.searchRecipeByIngredient(potentialRecipes, formValue);
