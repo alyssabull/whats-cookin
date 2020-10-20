@@ -12,6 +12,8 @@ let homeButton = document.querySelector('.home-button')
 let favoritesButton = document.querySelector('.favorites-button');
 let recipesToCookButton = document.querySelector('.recipes-to-cook-button');
 let usersButton = document.querySelector('.users-button');
+let searchButton = document.querySelector('.search-button');
+let antipasti = document.querySelector('#antipasti');
 
 allRecipes.addEventListener('click', toggleFavoriteIcon);
 allRecipes.addEventListener('click', toggleToCookIcon);
@@ -22,6 +24,7 @@ favoritesButton.addEventListener('click', displayFavorites);
 recipesToCookButton.addEventListener('click', displayRecipesToCook);
 pantryButton.addEventListener('click', displayUserPantry);
 usersButton.addEventListener('click', loadUser);
+searchButton.addEventListener('click', getFormValue);
 
 let user;
 let pantry;
@@ -247,7 +250,7 @@ function displayUserPantry() {
   pantryButton.classList.add('hidden');
   recipesToCookButton.classList.remove('inactive');
   favoritesButton.classList.remove('inactive');
-  pantryStock.insertAdjacentHTML('afterbegin', `<div class="pantry-image"><img src="https://cdn.apartmenttherapy.info/image/upload/v1558687631/k/archive/8d007e7c8e504d69322e3f845fc1ed813f8305ec.png" class="pantry-image"><p class="pantry-stock">Current Pantry Stock</p></div>`)
+  pantryStock.insertAdjacentHTML('afterbegin', `<img src="https://cdn.apartmenttherapy.info/image/upload/v1558687631/k/archive/8d007e7c8e504d69322e3f845fc1ed813f8305ec.png" class="pantry-image"><p class="pantry-stock">Current Pantry Stock</p>`)
   pantry.userPantry.forEach(ingredient => {
     var randomColor = Math.floor(Math.random()*16777215).toString(16);
     let pantryInfo = `<article class="pantry-card">
@@ -319,4 +322,56 @@ function goHome() {
   recipeCardPage.innerHTML = '';
   pantryStock.innerHTML = '';
   displayAllRecipes();
+}
+
+function getFormValue() {
+  if (document.getElementById('search-recipes').elements['tag-button'].value) {
+    let value = document.getElementById('search-recipes').elements['tag-button'].value
+    displayTagSearch(value);
+  } else if (document.getElementById('search-recipes').elements['form-search'].value) {
+    let value = document.getElementById('search-recipes').elements['form-search'].value
+    displayIngredientSearch(value);
+  }
+}
+
+function displayTagSearch(formValue) {
+    allRecipes.innerHTML = '';
+    allRecipes.innerHTML = `<h3 class="title">${formValue} Recipes</h3>`;
+    let filteredRecipes = user.filterRecipeByTag(potentialRecipes, formValue);
+    filteredRecipes.forEach(recipe => {
+      let recipeCard = `
+        <article class="recipe-card">
+          <div class="view-recipe">
+            <img src=${recipe.image} class="recipe-image ${recipe.id}">
+          </div>
+          <h4 class="recipe-name">${recipe.name}</h4>
+          <div class="recipe-card-buttons">
+            <img src="../assets/heart-regular.svg" class="heart-button ${recipe.id}">
+            <img src="../assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
+            <br>
+          </div>
+        </article>`
+      allRecipes.insertAdjacentHTML('beforeend', recipeCard);
+    })
+}
+
+function displayIngredientSearch(formValue) {
+    allRecipes.innerHTML = '';
+    allRecipes.innerHTML = `<h3 class="title">${formValue} Recipes</h3>`;
+    let filteredRecipes = user.searchRecipeByIngredient(potentialRecipes, formValue);
+    filteredRecipes.forEach(recipe => {
+      let recipeCard = `
+        <article class="recipe-card">
+          <div class="view-recipe">
+            <img src=${recipe.image} class="recipe-image ${recipe.id}">
+          </div>
+          <h4 class="recipe-name">${recipe.name}</h4>
+          <div class="recipe-card-buttons">
+            <img src="../assets/heart-regular.svg" class="heart-button ${recipe.id}">
+            <img src="../assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
+            <br>
+          </div>
+        </article>`
+      allRecipes.insertAdjacentHTML('beforeend', recipeCard);
+    })
 }
