@@ -27,20 +27,24 @@ class User {
     return recipe.tags.includes(tagName);
     })
   }
-  searchRecipeByIngredient(recipes, keyword) {
+    
+   searchRecipeByIngredient(recipes, keyword) {
     let keywordID;
-    ingredientsData.forEach(ingredientData => {
-      if (keyword === ingredientData.name) {
-        keywordID = ingredientData.id;
-      }
-      return recipes.filter(recipe => {
-        if (recipe.ingredients.id === keywordID) {
-          return recipe;
+    ingredientsData.forEach(ingredient => {
+        if (keyword === ingredient.name) {
+            keywordID = ingredient.id;
         }
-      })
     })
-    return recipes;
-  }
+    let filteredRecipes = [];
+    recipes.forEach(recipe => {
+        recipe.ingredients.forEach(ingredient => {
+            if (ingredient.id === keywordID) {
+                filteredRecipes.push(recipe);
+            }
+        })
+    })
+    return filteredRecipes;
+   }   
 }
 
 if (typeof module === undefined) {
