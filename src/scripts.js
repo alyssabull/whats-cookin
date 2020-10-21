@@ -13,6 +13,8 @@ let favoritesButton = document.querySelector('.favorites-button');
 let recipesToCookButton = document.querySelector('.recipes-to-cook-button');
 let usersButton = document.querySelector('.users-button');
 let searchButton = document.querySelector('.search-button');
+let tagButtons = document.querySelectorAll('.tag-button');
+let searchInput = document.querySelector('.search-ingredient');
 
 allRecipes.addEventListener('click', toggleFavoriteIcon);
 allRecipes.addEventListener('click', toggleToCookIcon);
@@ -119,13 +121,13 @@ function displayRecipeCard(event) {
                     <div class="recipe-card-name">${recipe.name}</div>
                     <div class="recipe-information">
                     <div class="recipe-ingredients">Ingredients: <ul>
-                     ${recipe.ingredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`+ "<br />"})}
+                     ${recipe.ingredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`+ "<br />"}).join('')}
                     </ul>
                     <div class="recipe-cost">Cost: $${recipe.ingredients.reduce((totalCost, currentIngredient) => {
                         return totalCost += currentIngredient.cost;
                     }, 0)}</div>
                     </div>
-                    <div class="recipe-instructions">Instructions: <ul> ${recipe.instructions.map(instruction => {return `${instruction.number}: ${instruction.instruction}`+ "<br />"})}</ul></div>
+                    <div class="recipe-instructions">Instructions: <ul> ${recipe.instructions.map(instruction => {return `${instruction.number}: ${instruction.instruction}`+ "<br />"}).join('')}</ul></div>
                     </div>
                     <button class="check-stock-button pink-button not-clicked ${recipe.id}">Check Pantry Stock</button>
                     </div>`
@@ -274,7 +276,7 @@ function checkPantryStock(event) {
             if(event.target.classList.contains(id)) {
                 pantry.checkStock(recipe);
                 let missingIngredientsList = `
-                    <div>Missing Ingredients:<br> <ul> ${pantry.missingIngredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`+ "<br />"})}</ul></div>`
+                    <div>Missing Ingredients:<br> <ul> ${pantry.missingIngredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`+ "<br />"}).join('')}</ul></div>`
                 recipeCardPage.insertAdjacentHTML('beforeend', missingIngredientsList);
             }
         })
@@ -342,7 +344,10 @@ function getFormValue() {
   } else if (document.getElementById('search-recipes').elements['form-search'].value) {
     let value = document.getElementById('search-recipes').elements['form-search'].value
     displayIngredientSearch(value, potentialRecipes);
+  } else {
+    alert('Make a selection!')
   }
+  clearFormValues();
 }
 
 function displayTagSearch(formValue, recipesArray) {
@@ -388,4 +393,11 @@ function displayIngredientSearch(formValue, recipesArray) {
         </article>`
       allRecipes.insertAdjacentHTML('beforeend', recipeCard);
     })
+}
+
+function clearFormValues() {
+  tagButtons.forEach(button => {
+    button.checked = false;
+  })
+  searchInput.innerHTML = `<input class="search-ingredient" placeholder= "type the name of an ingredient" id="form-search"></input>`;
 }

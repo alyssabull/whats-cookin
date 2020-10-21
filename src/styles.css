@@ -73,10 +73,12 @@ nav {
   border-radius: 50%;
   outline: none;
   border: none;
+  display: none;
 }
 
-.tag-button:focus {
-  opacity: 0.3;
+input[type=radio]:checked + label {
+  opacity: 0.2;
+  font-style: normal;
 }
 
 .tag-image {
