@@ -26,33 +26,37 @@ In this project, we've created a recipe tracking / meal planning application tha
 #### Home Page
 
 * When the user loads the page, a home page is displayed that features an 'All Recipes' section as well as a search section. The 'All Recipes' section shows a list of recipes that a user may view and add to their favorites or recipes to cook if they desire. The search section allows a user to filter recipes by category or ingredient.
-* 
 
 (Insert screenshot)
 
+#### Navigation Bar
+
+*
+
 #### Favorited Recipes Page
 
-
+*
 
 #### Recipes To Cook Page
 
-
+*
 
 #### User Pantry
 
-
+*
 
 #### Checking Pantry Stock
 
-
+*
 
 #### Searching For Recipes
 
-
+*
 
 ## Wins
 
-
+*
 
 ## Challenges
 
+*
