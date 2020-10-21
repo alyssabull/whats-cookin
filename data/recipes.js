@@ -3485,7 +3485,7 @@ const recipeData = [
   },
   {
     "id": 673337,
-    "image": "https://i.pinimg.com/originals/a3/6f/f3/a36ff3aefb15adbc344eddad9d76d878.jpg",
+    "image": "https://www.amomstake.com/wp-content/uploads/2014/02/Side-View-Fruit-Loop-Krispies.jpg",
     "ingredients": [
       {
         "id": 98998,
