@@ -293,26 +293,26 @@ function goHome() {
 }
 
 function getFormValue() {
-  let tagButtonElement = document.getElementById('search-recipes').elements['tag-button'].value;
-  let formSearchElement = document.getElementById('search-recipes').elements['form-search'].value
-  if (formSearchElement && favoritesButton.classList.contains('inactive')) {
-    let value = tagButtonElement;
+  if (document.getElementById('search-recipes').elements['form-search'].value && favoritesButton.classList.contains('inactive')) {
+    let value = document.getElementById('search-recipes').elements['tag-button'].value;
     displayTagSearch(value, user.favoriteRecipes);
-  } else if (formSearchElement && favoritesButton.classList.contains('inactive')) {
-    let value = formSearchElement;
+  } else if (document.getElementById('search-recipes').elements['form-search'].value && favoritesButton.classList.contains('inactive')) {
+    let value = document.getElementById('search-recipes').elements['form-search'].value;
     displayIngredientSearch(value, user.favoriteRecipes);
-  } else if (tagButtonElement && recipesToCookButton.classList.contains('inactive')) {
-    let value = tagButtonElement;
+  } else if (document.getElementById('search-recipes').elements['tag-button'].value && recipesToCookButton.classList.contains('inactive')) {
+    let value = document.getElementById('search-recipes').elements['tag-button'].value;
     displayTagSearch(value, user.recipesToCook);
-  } else if (formSearchElement && recipesToCookButton.classList.contains('inactive')) {
-    let value = formSearchElement;
+  } else if (document.getElementById('search-recipes').elements['form-search'].value && recipesToCookButton.classList.contains('inactive')) {
+    let value = document.getElementById('search-recipes').elements['form-search'].value;
     displayIngredientSearch(value, user.recipesToCook);
-  } else if (tagButtonElement) {
-    let value = tagButtonElement;
+  } else if (document.getElementById('search-recipes').elements['tag-button'].value) {
+    let value = document.getElementById('search-recipes').elements['tag-button'].value;
     displayTagSearch(value, potentialRecipes);
-  } else if (formSearchElement) {
-    let value = formSearchElement;
+  } else if (document.getElementById('search-recipes').elements['form-search'].value) {
+    let value = document.getElementById('search-recipes').elements['form-search'].value;
     displayIngredientSearch(value, potentialRecipes);
+  } else {
+    alert('Make a selection or type an ingredient to search!');
   }
   clearFormValues();
 }
@@ -366,7 +366,7 @@ function clearFormValues() {
   tagButtons.forEach(button => {
     button.checked = false;
   })
-  searchInput.innerHTML = `<input class="search-ingredient" placeholder= "type the name of an ingredient" id="form-search"></input>`;
+  searchInput.value = '';
 }
 
 function removeRecipe(event) {
