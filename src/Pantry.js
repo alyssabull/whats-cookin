@@ -4,7 +4,6 @@ class Pantry {
     this.missingIngredients = [];
   }
   getPantryItems() {
-    console.log(this.userPantry);
     this.userPantry.map(ingredient => {
       const id = ingredient.ingredient;
       ingredientsData.map(ingredientData => {

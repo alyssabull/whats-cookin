@@ -1,20 +1,19 @@
 window.addEventListener('load', loadPage);
 
+let user;
+let pantry;
+let potentialRecipes = [];
 let allRecipes = document.querySelector('.all-recipes');
 let searchBar = document.querySelector('.search-bar');
 let recipeCardPage = document.querySelector('.recipe-card-page');
-let header = document.querySelector('h1');
 let dailyRecipe = document.querySelector('.daily-recipe');
 let pantryStock = document.querySelector('.pantry');
-let pantryBox = document.querySelector('.pantry-box');
 let pantryButton = document.querySelector('.pantry-button');
 let homeButton = document.querySelector('.home-button')
 let favoritesButton = document.querySelector('.favorites-button');
 let recipesToCookButton = document.querySelector('.recipes-to-cook-button');
 let usersButton = document.querySelector('.users-button');
 let searchButton = document.querySelector('.search-button');
-let tagButtons = document.querySelectorAll('.tag-button');
-let searchInput = document.querySelector('.search-ingredient');
 
 allRecipes.addEventListener('click', toggleFavoriteIcon);
 allRecipes.addEventListener('click', toggleToCookIcon);
@@ -22,16 +21,12 @@ allRecipes.addEventListener('click', displayRecipeCard);
 allRecipes.addEventListener('click', removeRecipe);
 allRecipes.addEventListener('click', resetSearch);
 recipeCardPage.addEventListener('click', checkPantryStock);
-homeButton.addEventListener('click', goHome);
+homeButton.addEventListener('click', displayHomePage);
 favoritesButton.addEventListener('click', displayFavorites);
 recipesToCookButton.addEventListener('click', displayRecipesToCook);
 pantryButton.addEventListener('click', displayUserPantry);
 usersButton.addEventListener('click', loadUser);
 searchButton.addEventListener('click', getFormValue);
-
-let user;
-let pantry;
-let potentialRecipes = [];
 
 function loadPage() {
   loadUser();
@@ -40,6 +35,7 @@ function loadPage() {
 }
 
 function loadUser() {
+  let header = document.querySelector('h1');
   let randomIndex = Math.floor(Math.random() * 49);
   user = new User(usersData[randomIndex].name, usersData[randomIndex].id, usersData[randomIndex].pantry);
   header.innerText = `What's Cookin', ${user.name}`;
@@ -144,12 +140,12 @@ function displayFavorites() {
   pantryStock.innerHTML = '';
   recipeCardPage.innerHTML = '';
   allRecipes.classList.remove('hidden');
-  allRecipes.innerHTML = `<h3 class="title">Favorite Recipes</h3>`;
+  searchBar.classList.remove('hidden');
   dailyRecipe.classList.add('hidden');
   favoritesButton.classList.add('inactive');
   pantryButton.classList.remove('inactive');
   recipesToCookButton.classList.remove('inactive');
-  searchBar.classList.remove('hidden');
+  allRecipes.innerHTML = `<h3 class="title">Favorite Recipes</h3>`;
   if (user.favoriteRecipes.length > 0) {
     user.favoriteRecipes.forEach(recipe => {
       let recipeCard = `
@@ -168,14 +164,14 @@ function displayFavorites() {
   }
 
 function displayRecipesToCook() {
+    pantryStock.innerHTML = '';
+    recipeCardPage.innerHTML = '';
     searchBar.classList.remove('hidden');
     allRecipes.classList.remove('hidden');
     dailyRecipe.classList.add('hidden');
     recipesToCookButton.classList.add('inactive');
     favoritesButton.classList.remove('inactive');
     pantryButton.classList.remove('inactive');
-    pantryStock.innerHTML = '';
-    recipeCardPage.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">Recipes To Cook</h3>`;
     if (user.recipesToCook.length > 0) {
     user.recipesToCook.forEach(recipe => {
@@ -192,55 +188,6 @@ function displayRecipesToCook() {
   } else {
       allRecipes.insertAdjacentHTML('beforeend', `<p class="no-recipe-message">No recipes selected to cook at this time! Click on the  <img src="../assets/unselected-chef-hat.svg" class="to-cook-button2">  icon to add a recipe!</p>`);
     }
-}
-
-function toggleFavoriteIcon(event) {
-    if (event.target.classList.contains('heart-button')) {
-    event.target.src = "../assets/red-heart-icon.jpg";
-    event.target.classList.add('red-heart-button');
-    event.target.classList.remove('heart-button');
-    potentialRecipes.forEach(recipe => {
-        let id = recipe.id;
-        if(event.target.classList.contains(id)) {
-            user.addToFavorites(recipe);
-        }
-    })
-  } else if (event.target.classList.contains('red-heart-button')) {
-    event.target.src = "../assets/heart-regular.svg";
-    event.target.classList.add('heart-button');
-    event.target.classList.remove('red-heart-button');
-    potentialRecipes.forEach(recipe => {
-        let id = recipe.id;
-        if(event.target.classList.contains(id)) {
-            user.removeFromFavorites(recipe);
-        }
-    })
-  }
-}
-
-function toggleToCookIcon(event) {
-  debugger
-    if (event.target.classList.contains('to-cook-button')) {
-    event.target.src = "../assets/selected-chef-hat.svg";
-    event.target.classList.add('gray-cook-button');
-    event.target.classList.remove('to-cook-button');
-    potentialRecipes.forEach(recipe => {
-        let id = recipe.id;
-        if(event.target.classList.contains(id)) {
-            user.addToRecipesToCook(recipe);
-        }
-    })
-  } else if (event.target.classList.contains('gray-cook-button')) {
-    event.target.src = "../assets/unselected-chef-hat.svg";
-    event.target.classList.add('to-cook-button');
-    event.target.classList.remove('gray-cook-button');
-    potentialRecipes.forEach(recipe => {
-        let id = recipe.id;
-        if(event.target.classList.contains(id)) {
-            user.removeFromRecipesToCook(recipe);
-        }
-    })
-  }
 }
 
 function displayUserPantry() {
@@ -269,6 +216,66 @@ function displayUserPantry() {
   }
 }
 
+function displayHomePage() {
+  searchBar.classList.remove('hidden');
+  allRecipes.classList.remove('hidden');
+  dailyRecipe.classList.remove('hidden');
+  pantryButton.classList.remove('inactive');
+  recipesToCookButton.classList.remove('hidden');
+  favoritesButton.classList.remove('inactive');
+  recipesToCookButton.classList.remove('inactive');
+  recipeCardPage.innerHTML = '';
+  pantryStock.innerHTML = '';
+  displayAllRecipes();
+}
+
+function toggleFavoriteIcon(event) {
+    if (event.target.classList.contains('heart-button')) {
+    event.target.src = "../assets/red-heart-icon.jpg";
+    event.target.classList.add('red-heart-button');
+    event.target.classList.remove('heart-button');
+    potentialRecipes.forEach(recipe => {
+        let id = recipe.id;
+        if(event.target.classList.contains(id)) {
+            user.addToFavorites(recipe);
+        }
+    })
+  } else if (event.target.classList.contains('red-heart-button')) {
+    event.target.src = "../assets/heart-regular.svg";
+    event.target.classList.add('heart-button');
+    event.target.classList.remove('red-heart-button');
+    potentialRecipes.forEach(recipe => {
+        let id = recipe.id;
+        if(event.target.classList.contains(id)) {
+            user.removeFromFavorites(recipe);
+        }
+    })
+  }
+}
+
+function toggleToCookIcon(event) {
+    if (event.target.classList.contains('to-cook-button')) {
+    event.target.src = "../assets/selected-chef-hat.svg";
+    event.target.classList.add('gray-cook-button');
+    event.target.classList.remove('to-cook-button');
+    potentialRecipes.forEach(recipe => {
+        let id = recipe.id;
+        if(event.target.classList.contains(id)) {
+            user.addToRecipesToCook(recipe);
+        }
+    })
+  } else if (event.target.classList.contains('gray-cook-button')) {
+    event.target.src = "../assets/unselected-chef-hat.svg";
+    event.target.classList.add('to-cook-button');
+    event.target.classList.remove('gray-cook-button');
+    potentialRecipes.forEach(recipe => {
+        let id = recipe.id;
+        if(event.target.classList.contains(id)) {
+            user.removeFromRecipesToCook(recipe);
+        }
+    })
+  }
+}
 
 function checkPantryStock(event) {
     pantry = new Pantry(user.pantry);
@@ -288,72 +295,36 @@ function checkPantryStock(event) {
     }
 }
 
-function goHome() {
-  searchBar.classList.remove('hidden');
-  allRecipes.classList.remove('hidden');
-  dailyRecipe.classList.remove('hidden');
-  pantryButton.classList.remove('inactive');
-  recipesToCookButton.classList.remove('hidden');
-  favoritesButton.classList.remove('inactive');
-  recipesToCookButton.classList.remove('inactive');
-  recipeCardPage.innerHTML = '';
-  pantryStock.innerHTML = '';
-  displayAllRecipes();
-}
-
 function getFormValue() {
-  if (document.getElementById('search-recipes').elements['form-search'].value && favoritesButton.classList.contains('inactive')) {
+  if (document.getElementById('search-recipes').elements['tag-button'].value && favoritesButton.classList.contains('inactive')) {
     let value = document.getElementById('search-recipes').elements['tag-button'].value;
-    displayTagSearch(value, user.favoriteRecipes);
+    displaySearchResults(user.filterRecipeByTag, value, user.favoriteRecipes);
   } else if (document.getElementById('search-recipes').elements['form-search'].value && favoritesButton.classList.contains('inactive')) {
     let value = document.getElementById('search-recipes').elements['form-search'].value;
-    displayIngredientSearch(value, user.favoriteRecipes);
+    displaySearchResults(user.searchRecipeByIngredient, value, user.favoriteRecipes);
   } else if (document.getElementById('search-recipes').elements['tag-button'].value && recipesToCookButton.classList.contains('inactive')) {
     let value = document.getElementById('search-recipes').elements['tag-button'].value;
-    displayTagSearch(value, user.recipesToCook);
+    displaySearchResults(user.filterRecipeByTag, value, user.recipesToCook);
   } else if (document.getElementById('search-recipes').elements['form-search'].value && recipesToCookButton.classList.contains('inactive')) {
     let value = document.getElementById('search-recipes').elements['form-search'].value;
-    displayIngredientSearch(value, user.recipesToCook);
+    displaySearchResults(user.searchRecipeByIngredient, value, user.recipesToCook);
   } else if (document.getElementById('search-recipes').elements['tag-button'].value) {
     let value = document.getElementById('search-recipes').elements['tag-button'].value;
-    displayTagSearch(value, potentialRecipes);
+    displaySearchResults(user.filterRecipeByTag, value, potentialRecipes);
   } else if (document.getElementById('search-recipes').elements['form-search'].value) {
     let value = document.getElementById('search-recipes').elements['form-search'].value;
-    displayIngredientSearch(value, potentialRecipes);
+    displaySearchResults(user.searchRecipeByIngredient, value, potentialRecipes);
   } else {
     alert('Make a selection or type an ingredient to search!');
   }
   clearFormValues();
 }
 
-function displayTagSearch(formValue, recipesArray) {
+function displaySearchResults(searchMethod, formValue, recipesArray) {
     event.preventDefault();
     allRecipes.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">\'${formValue}\' Recipes<button class="reset-button pink-button">Reset Search</button></h3>`;
-    let filteredRecipes = user.filterRecipeByTag(recipesArray, formValue);
-    filteredRecipes.forEach(recipe => {
-      let recipeCard = `
-        <article class="recipe-card">
-          <div class="view-recipe">
-            <img src=${recipe.image} class="recipe-image ${recipe.id}">
-          </div>
-          <h4 class="recipe-name">${recipe.name}</h4>
-          <div class="recipe-card-buttons">
-            <img src="../assets/heart-regular.svg" class="heart-button ${recipe.id}">
-            <img src="../assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
-            <br>
-          </div>
-        </article>`
-      allRecipes.insertAdjacentHTML('beforeend', recipeCard);
-    })
-}
-
-function displayIngredientSearch(formValue, recipesArray) {
-    event.preventDefault();
-    allRecipes.innerHTML = '';
-    allRecipes.innerHTML = `<h3 class="title">\'${formValue}\' Recipes<button class="reset-button pink-button">Reset Search</button></h3>`;
-    let filteredRecipes = user.searchRecipeByIngredient(recipesArray, formValue);
-    console.log(filteredRecipes);
+    let filteredRecipes = searchMethod(recipesArray, formValue);
     filteredRecipes.forEach(recipe => {
       let recipeCard = `
       <article class="recipe-card">
@@ -372,6 +343,8 @@ function displayIngredientSearch(formValue, recipesArray) {
 }
 
 function clearFormValues() {
+  let tagButtons = document.querySelectorAll('.tag-button');
+  let searchInput = document.querySelector('.search-ingredient');
   tagButtons.forEach(button => {
     button.checked = false;
   })
