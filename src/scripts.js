@@ -20,6 +20,7 @@ allRecipes.addEventListener('click', toggleFavoriteIcon);
 allRecipes.addEventListener('click', toggleToCookIcon);
 allRecipes.addEventListener('click', displayRecipeCard);
 allRecipes.addEventListener('click', removeRecipe);
+allRecipes.addEventListener('click', resetSearch);
 recipeCardPage.addEventListener('click', checkPantryStock);
 homeButton.addEventListener('click', goHome);
 favoritesButton.addEventListener('click', displayFavorites);
@@ -156,7 +157,7 @@ function displayFavorites() {
           <img src=${recipe.image} class="recipe-image ${recipe.id}">
         </div>
         <h4 class="recipe-name">${recipe.name}</h4>
-        <button class="remove-favorite" id="${recipe.id}">REMOVE</button>
+        <button class="remove-favorite pink-button" id="${recipe.id}">REMOVE</button>
       </article>`
   allRecipes.insertAdjacentHTML('beforeend', recipeCard);
 })
@@ -180,12 +181,12 @@ function displayRecipesToCook() {
             <img src=${recipe.image} class="recipe-image ${recipe.id}">
           </div>
           <h4 class="recipe-name">${recipe.name}</h4>
-          <button class="remove-to-cook" id="${recipe.id}">REMOVE</button>
+          <button class="remove-to-cook pink-button" id="${recipe.id}">REMOVE</button>
         </article>`
     allRecipes.insertAdjacentHTML('beforeend', recipeCard);
     })
   } else {
-      allRecipes.insertAdjacentHTML('beforeend', `<p class="no-recipe-message">No favorite recipes to display at this time! Click on the  <img src="../assets/heart-regular.svg" class="to-cook-button2">  icon to add a recipe!</p>`);
+      allRecipes.insertAdjacentHTML('beforeend', `<p class="no-recipe-message">No recipes selected to cook at this time! Click on the  <img src="../assets/unselected-chef-hat.svg" class="to-cook-button2">  icon to add a recipe!</p>`);
     }
 }
 
@@ -319,7 +320,7 @@ function getFormValue() {
 function displayTagSearch(formValue, recipesArray) {
     event.preventDefault();
     allRecipes.innerHTML = '';
-    allRecipes.innerHTML = `<h3 class="title">\'${formValue}\' Recipes</h3>`;
+    allRecipes.innerHTML = `<h3 class="title">\'${formValue}\' Recipes<button class="reset-button pink-button">Reset Search</button></h3>`;
     let filteredRecipes = user.filterRecipeByTag(recipesArray, formValue);
     filteredRecipes.forEach(recipe => {
       let recipeCard = `
@@ -341,7 +342,7 @@ function displayTagSearch(formValue, recipesArray) {
 function displayIngredientSearch(formValue, recipesArray) {
     event.preventDefault();
     allRecipes.innerHTML = '';
-    allRecipes.innerHTML = `<h3 class="title">\'${formValue}\' Recipes</h3>`;
+    allRecipes.innerHTML = `<h3 class="title">\'${formValue}\' Recipes<button class="reset-button pink-button">Reset Search</button></h3>`;
     let filteredRecipes = user.searchRecipeByIngredient(recipesArray, formValue);
     console.log(filteredRecipes);
     filteredRecipes.forEach(recipe => {
@@ -367,6 +368,7 @@ function clearFormValues() {
   })
   searchInput.innerHTML = `<input class="search-ingredient" placeholder= "type the name of an ingredient" id="form-search"></input>`;
 }
+
 function removeRecipe(event) {
   if (event.target.classList.contains('remove-favorite')) {
     user.favoriteRecipes.forEach(recipe => {
@@ -384,5 +386,12 @@ function removeRecipe(event) {
       }
     })
     displayRecipesToCook();
+  }
+}
+
+function resetSearch() {
+  if (event.target.classList.contains('reset-button')) {
+    allRecipes.innerHTML = '';
+    displayAllRecipes();
   }
 }

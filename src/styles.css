@@ -58,6 +58,17 @@ nav {
   margin-right: 30px;
 }
 
+.cook-icon {
+  display: flex;
+  fill: white;
+  height: 15px;
+  width: 15px;
+}
+
+.cook-icon path {
+  fill: white;
+}
+
 .search-bar {
   border: solid 2px #CCCCCC;
   border-radius: 10px;
@@ -343,6 +354,8 @@ transition: 1s ease;
 .no-recipe-message {
   display: flex;
   justify-content: center;
+  margin-left: 10%;
+  margin-bottom: 60%;
 }
 
 .inactive {
@@ -384,4 +397,8 @@ transition: 1s ease;
 
 .recipe-instructions {
   width: 80%;
+}
+
+.reset-button {
+  margin-left: 20px;
 }
