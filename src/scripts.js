@@ -122,16 +122,17 @@ function displayRecipeCard(event) {
                     <img src='${recipe.image}' class="recipe-info-image">
                     <div class="recipe-card-name">${recipe.name}</div>
                     <div class="recipe-information">
-                    <div class="recipe-ingredients">Ingredients: <ul>
+                    <div class="recipe-ingredients"><b>Ingredients:</b> <ul>
                      ${recipe.ingredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`+ "<br />"}).join('')}
                     </ul>
-                    <div class="recipe-cost">Cost: $${recipe.ingredients.reduce((totalCost, currentIngredient) => {
+                    <div class="recipe-cost"><b>Cost:</b> $${recipe.ingredients.reduce((totalCost, currentIngredient) => {
                         return totalCost += currentIngredient.cost;
                     }, 0).toFixed(2)}</div>
                     </div>
-                    <div class="recipe-instructions">Instructions: <ul> ${recipe.instructions.map(instruction => {return `${instruction.number}: ${instruction.instruction}`+ "<br />"+ "<br />"}).join('')}</ul></div>
+                    <div class="recipe-instructions"><b>Instructions:</b> <ul> ${recipe.instructions.map(instruction => {return `${instruction.number}: ${instruction.instruction}`+ "<br />"+ "<br />"}).join('')}</ul></div>
                     </div>
                     <button class="check-stock-button pink-button not-clicked ${recipe.id}">Check Pantry Stock</button>
+                    <section class="missing-ingredients"></section>
                     </div>`
                 recipeCardPage.insertAdjacentHTML('afterbegin', recipeInfo);
             }
@@ -219,6 +220,7 @@ function toggleFavoriteIcon(event) {
 
 function toggleToCookIcon(event) {
     if (event.target.classList.contains('to-cook-button')) {
+      debugger
     event.target.src = "../assets/selected-chef-hat.svg";
     event.target.classList.add('gray-cook-button');
     event.target.classList.remove('to-cook-button');
@@ -247,6 +249,7 @@ function displayUserPantry() {
   searchBar.classList.add('hidden');
   allRecipes.classList.add('hidden');
   dailyRecipe.classList.add('hidden');
+  recipeCardPage.innerHTML = '';
   recipesToCookButton.classList.remove('inactive');
   favoritesButton.classList.remove('inactive');
   if(!pantryButton.classList.contains('inactive')){
@@ -274,11 +277,12 @@ function checkPantryStock(event) {
         event.target.classList.add('inactive');
         potentialRecipes.forEach(recipe => {
             let id = recipe.id;
+            let missingIngredients = document.querySelector('.missing-ingredients');
             if(event.target.classList.contains(id)) {
                 pantry.checkStock(recipe);
                 let missingIngredientsList = `
-                    <div>Missing Ingredients:<br> <ul> ${pantry.missingIngredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`+ "<br />"}).join('')}</ul></div>`
-                recipeCardPage.insertAdjacentHTML('beforeend', missingIngredientsList);
+                    <div><b>Missing Ingredients:<b><br> <ul> ${pantry.missingIngredients.map(ingredient => {return ` ${ingredient.quantity.amount} ${ingredient.quantity.unit} ${ingredient.name}`})}</ul></div>`
+                missingIngredients.insertAdjacentHTML('beforeend', missingIngredientsList);
             }
         })
     }
@@ -288,7 +292,7 @@ function goHome() {
   searchBar.classList.remove('hidden');
   allRecipes.classList.remove('hidden');
   dailyRecipe.classList.remove('hidden');
-  pantryButton.classList.remove('hidden');
+  pantryButton.classList.remove('inactive');
   recipesToCookButton.classList.remove('hidden');
   favoritesButton.classList.remove('inactive');
   recipesToCookButton.classList.remove('inactive');
@@ -395,7 +399,13 @@ function removeRecipe(event) {
 }
 
 function resetSearch() {
-  if (event.target.classList.contains('reset-button')) {
+  if (event.target.classList.contains('reset-button') && favoritesButton.classList.contains('inactive')) {
+    allRecipes.innerHTML = '';
+    displayFavorites();
+  } else if (event.target.classList.contains('reset-button') && recipesToCookButton.classList.contains('inactive')) {
+    allRecipes.innerHTML = '';
+    displayRecipesToCook();
+  } else {
     allRecipes.innerHTML = '';
     displayAllRecipes();
   }

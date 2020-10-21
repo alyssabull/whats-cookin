@@ -407,3 +407,7 @@ transition: 1s ease;
 .reset-button {
   margin-left: 20px;
 }
+
+.missing-ingredients {
+  margin-top: 10px;
+}
