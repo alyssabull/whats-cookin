@@ -3485,7 +3485,7 @@ const recipeData = [
   },
   {
     "id": 673337,
-    "image": "https://i.pinimg.com/originals/a3/6f/f3/a36ff3aefb15adbc344eddad9d76d878.jpg",
+    "image": "https://www.amomstake.com/wp-content/uploads/2014/02/Side-View-Fruit-Loop-Krispies.jpg",
     "ingredients": [
       {
         "id": 98998,
@@ -3991,7 +3991,7 @@ const recipeData = [
   },
   {
     "id": 445196,
-    "image": "https://www.onceuponachef.com/images/2012/03/cajun-bbq-shrimp-1-575x431.jpg",
+    "image": "https://www.eatwell101.com/wp-content/uploads/2017/01/Stir-Fry-Teriyaki-Shrimp-with-Zucchini-Noodle.jpg",
     "ingredients": [
       {
         "id": 6150,

@@ -27,7 +27,6 @@ class User {
     return recipe.tags.includes(tagName);
     })
   }
-    
    searchRecipeByIngredient(recipes, keyword) {
     let keywordID;
     ingredientsData.forEach(ingredient => {
@@ -44,7 +43,7 @@ class User {
         })
     })
     return filteredRecipes;
-   }   
+   }
 }
 
 if (typeof module === undefined) {

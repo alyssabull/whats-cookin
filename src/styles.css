@@ -58,6 +58,17 @@ nav {
   margin-right: 30px;
 }
 
+.cook-icon {
+  display: flex;
+  fill: white;
+  height: 15px;
+  width: 15px;
+}
+
+.cook-icon path {
+  fill: white;
+}
+
 .search-bar {
   border: solid 2px #CCCCCC;
   border-radius: 10px;
@@ -73,16 +84,21 @@ nav {
   border-radius: 50%;
   outline: none;
   border: none;
+  display: none;
 }
 
-.tag-button:focus {
-  opacity: 0.3;
+input[type=radio]:checked + label {
+  opacity: 0.2;
+  font-style: normal;
 }
 
 .tag-image {
   height: 60px;
   width: 60px;
   border-radius: 50%;
+}
+
+.tag-image:hover {
   cursor: pointer;
 }
 
@@ -259,7 +275,6 @@ h3 {
   border: none;
   background-color: white;
   outline: none;
-  color: #696969;
   cursor: pointer;
   height: 22px;
   width: 22px;
@@ -297,6 +312,7 @@ h3 {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  position: absolute;
 }
 
 .pantry-box {
@@ -317,14 +333,15 @@ h3 {
 
 .pantry-stock {
   opacity: 0.6;
-  position: absolute;
+  position: relative;
   width: 100%;
-  top: 65%;
   background-color: black;
   color: white;
   padding: 1%;
   font-weight: bold;
   font-size: 20px;
+  margin-top: -6%;
+  height: 25px;
 }
 
 .grow img{
@@ -341,6 +358,8 @@ transition: 1s ease;
 .no-recipe-message {
   display: flex;
   justify-content: center;
+  margin-left: 10%;
+  margin-bottom: 60%;
 }
 
 .inactive {
@@ -358,7 +377,7 @@ transition: 1s ease;
 }
 
 .recipe-card-name {
-  font-size: 25px;
+  font-size: 35px;
   font-weight: bold;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -382,4 +401,12 @@ transition: 1s ease;
 
 .recipe-instructions {
   width: 80%;
+}
+
+.reset-button {
+  margin-left: 20px;
+}
+
+.missing-ingredients {
+  margin-top: 10px;
 }
