@@ -146,7 +146,7 @@ function displayFavorites() {
   allRecipes.innerHTML = `<h3 class="title">Favorite Recipes</h3>`;
   dailyRecipe.classList.add('hidden');
   favoritesButton.classList.add('inactive');
-  pantryButton.classList.remove('hidden');
+  pantryButton.classList.remove('inactive');
   recipesToCookButton.classList.remove('inactive');
   searchBar.classList.remove('hidden');
   if (user.favoriteRecipes.length > 0) {
@@ -170,6 +170,9 @@ function displayRecipesToCook() {
     searchBar.classList.remove('hidden');
     allRecipes.classList.remove('hidden');
     dailyRecipe.classList.add('hidden');
+    recipesToCookButton.classList.add('inactive');
+    favoritesButton.classList.remove('inactive');
+    pantryButton.classList.remove('inactive');
     pantryStock.innerHTML = '';
     recipeCardPage.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">Recipes To Cook</h3>`;
@@ -244,21 +247,23 @@ function displayUserPantry() {
   searchBar.classList.add('hidden');
   allRecipes.classList.add('hidden');
   dailyRecipe.classList.add('hidden');
-  pantryButton.classList.add('hidden');
   recipesToCookButton.classList.remove('inactive');
   favoritesButton.classList.remove('inactive');
-  pantryStock.insertAdjacentHTML('afterbegin', `<img src="https://cdn.apartmenttherapy.info/image/upload/v1558687631/k/archive/8d007e7c8e504d69322e3f845fc1ed813f8305ec.png" class="pantry-image"><p class="pantry-stock">Current Pantry Stock</p>`)
-  pantry.userPantry.forEach(ingredient => {
-    var randomColor = Math.floor(Math.random()*16777215).toString(16);
-    let pantryInfo = `<article class="pantry-card">
-        <div class="pantry-box" style="background-color:#${randomColor};"></div>
-        <div class="pantry-info">
-          <div>Ingredient: ${ingredient.name}</div>
-          <div>Amount: ${ingredient.amount}</div>
-        </div>
-      </article>`
-    pantryStock.insertAdjacentHTML('beforeend', pantryInfo);
-  })
+  if(!pantryButton.classList.contains('inactive')){
+    pantryButton.classList.add('inactive');
+    pantryStock.insertAdjacentHTML('afterbegin', `<img src="https://cdn.apartmenttherapy.info/image/upload/v1558687631/k/archive/8d007e7c8e504d69322e3f845fc1ed813f8305ec.png" class="pantry-image"><p class="pantry-stock">Current Pantry Stock</p>`)
+    pantry.userPantry.forEach(ingredient => {
+      var randomColor = Math.floor(Math.random()*16777215).toString(16);
+      let pantryInfo = `<article class="pantry-card">
+          <div class="pantry-box" style="background-color:#${randomColor};"></div>
+          <div class="pantry-info">
+            <div>Ingredient: ${ingredient.name}</div>
+            <div>Amount: ${ingredient.amount}</div>
+          </div>
+        </article>`
+      pantryStock.insertAdjacentHTML('beforeend', pantryInfo);
+    })
+  }
 }
 
 

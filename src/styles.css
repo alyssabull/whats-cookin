@@ -313,6 +313,7 @@ h3 {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  position: absolute;
 }
 
 .pantry-box {
@@ -333,14 +334,15 @@ h3 {
 
 .pantry-stock {
   opacity: 0.6;
-  position: absolute;
+  position: relative;
   width: 100%;
-  top: 65%;
   background-color: black;
   color: white;
   padding: 1%;
   font-weight: bold;
   font-size: 20px;
+  margin-top: -6%;
+  height: 25px;
 }
 
 .grow img{
