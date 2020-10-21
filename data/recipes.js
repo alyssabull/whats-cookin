@@ -3991,7 +3991,7 @@ const recipeData = [
   },
   {
     "id": 445196,
-    "image": "https://www.onceuponachef.com/images/2012/03/cajun-bbq-shrimp-1-575x431.jpg",
+    "image": "https://www.eatwell101.com/wp-content/uploads/2017/01/Stir-Fry-Teriyaki-Shrimp-with-Zucchini-Noodle.jpg",
     "ingredients": [
       {
         "id": 6150,

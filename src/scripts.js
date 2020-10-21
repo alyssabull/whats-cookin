@@ -19,6 +19,7 @@ let searchInput = document.querySelector('.search-ingredient');
 allRecipes.addEventListener('click', toggleFavoriteIcon);
 allRecipes.addEventListener('click', toggleToCookIcon);
 allRecipes.addEventListener('click', displayRecipeCard);
+allRecipes.addEventListener('click', removeRecipe);
 recipeCardPage.addEventListener('click', checkPantryStock);
 homeButton.addEventListener('click', goHome);
 favoritesButton.addEventListener('click', displayFavorites);
@@ -150,16 +151,13 @@ function displayFavorites() {
   if (user.favoriteRecipes.length > 0) {
     user.favoriteRecipes.forEach(recipe => {
       let recipeCard = `
-        <article class="recipe-card">
-          <div class="view-recipe">
-            <img src=${recipe.image} class="recipe-image ${recipe.id}">
-          </div>
-          <h4 class="recipe-name">${recipe.name}</h4>
-          <div class="recipe-card-buttons">
-          <img src="../assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
-              <br>
-          </div>
-        </article>`
+      <article class="recipe-card">
+        <div class="view-recipe">
+          <img src=${recipe.image} class="recipe-image ${recipe.id}">
+        </div>
+        <h4 class="recipe-name">${recipe.name}</h4>
+        <button class="remove-favorite" id="${recipe.id}">REMOVE</button>
+      </article>`
   allRecipes.insertAdjacentHTML('beforeend', recipeCard);
 })
   } else {
@@ -170,6 +168,7 @@ function displayFavorites() {
 function displayRecipesToCook() {
     searchBar.classList.remove('hidden');
     allRecipes.classList.remove('hidden');
+    dailyRecipe.classList.add('hidden');
     pantryStock.innerHTML = '';
     recipeCardPage.innerHTML = '';
     allRecipes.innerHTML = `<h3 class="title">Recipes To Cook</h3>`;
@@ -181,11 +180,7 @@ function displayRecipesToCook() {
             <img src=${recipe.image} class="recipe-image ${recipe.id}">
           </div>
           <h4 class="recipe-name">${recipe.name}</h4>
-          <div class="recipe-card-buttons">
-          <img src="../assets/red-heart-icon.jpg" class="red-heart-button ${recipe.id}">
-          <img src="../assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
-              <br>
-          </div>
+          <button class="remove-to-cook" id="${recipe.id}">REMOVE</button>
         </article>`
     allRecipes.insertAdjacentHTML('beforeend', recipeCard);
     })
@@ -283,36 +278,6 @@ function checkPantryStock(event) {
     }
 }
 
-function displayRecipesToCook() {
-  pantryStock.innerHTML = '';
-  recipeCardPage.innerHTML = '';
-  allRecipes.classList.remove('hidden');
-  allRecipes.innerHTML = `<h3 class="title">Recipes to Cook</h3>`;
-  recipesToCookButton.classList.add('inactive');
-  dailyRecipe.classList.add('hidden');
-  pantryButton.classList.remove('hidden');
-  favoritesButton.classList.remove('inactive');
-  searchBar.classList.remove('hidden');
-  if (user.recipesToCook.length > 0) {
-    user.recipesToCook.forEach(recipe => {
-        let recipeCard = `
-        <article class="recipe-card">
-          <div class="view-recipe">
-            <img src=${recipe.image} class="recipe-image ${recipe.id}">
-          </div>
-          <h4 class="recipe-name">${recipe.name}</h4>
-          <div class="recipe-card-buttons">
-          <img src="../assets/red-heart-icon.jpg" class="red-heart-button ${recipe.id}">
-              <br>
-          </div>
-        </article>`
-    allRecipes.insertAdjacentHTML('beforeend', recipeCard);
-  })
-} else {
-    allRecipes.insertAdjacentHTML('beforeend', `<p class="no-recipe-message">No recipes to cook to display at this time! Click on the  <img src="../assets/unselected-chef-hat.svg" class="to-cook-button2">  icon to add a recipe!</p>`);
-  }
-}
-
 function goHome() {
   searchBar.classList.remove('hidden');
   allRecipes.classList.remove('hidden');
@@ -381,17 +346,17 @@ function displayIngredientSearch(formValue, recipesArray) {
     console.log(filteredRecipes);
     filteredRecipes.forEach(recipe => {
       let recipeCard = `
-        <article class="recipe-card">
-          <div class="view-recipe">
-            <img src=${recipe.image} class="recipe-image ${recipe.id}">
-          </div>
-          <h4 class="recipe-name">${recipe.name}</h4>
-          <div class="recipe-card-buttons">
-            <img src="../assets/heart-regular.svg" class="heart-button ${recipe.id}">
-            <img src="../assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
-            <br>
-          </div>
-        </article>`
+      <article class="recipe-card">
+        <div class="view-recipe">
+          <img src=${recipe.image} class="recipe-image ${recipe.id}">
+        </div>
+        <h4 class="recipe-name">${recipe.name}</h4>
+        <div class="recipe-card-buttons">
+          <img src="../assets/heart-regular.svg" class="heart-button ${recipe.id}">
+          <img src="../assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
+          <br>
+        </div>
+      </article>`
       allRecipes.insertAdjacentHTML('beforeend', recipeCard);
     })
 }
@@ -401,4 +366,23 @@ function clearFormValues() {
     button.checked = false;
   })
   searchInput.innerHTML = `<input class="search-ingredient" placeholder= "type the name of an ingredient" id="form-search"></input>`;
+}
+function removeRecipe(event) {
+  if (event.target.classList.contains('remove-favorite')) {
+    user.favoriteRecipes.forEach(recipe => {
+      if (recipe.id == event.target.id) {
+        let favoriteIndex = user.favoriteRecipes.indexOf(recipe);
+        user.favoriteRecipes.splice(favoriteIndex, 1)
+      }
+    })
+    displayFavorites();
+  } else if (event.target.classList.contains('remove-to-cook')) {
+    user.recipesToCook.forEach(recipe => {
+      if (recipe.id == event.target.id) {
+        let toCookIndex = user.recipesToCook.indexOf(recipe);
+        user.recipesToCook.splice(toCookIndex, 1)
+      }
+    })
+    displayRecipesToCook();
+  }
 }
