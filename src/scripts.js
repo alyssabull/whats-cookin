@@ -219,8 +219,8 @@ function toggleFavoriteIcon(event) {
 }
 
 function toggleToCookIcon(event) {
+  debugger
     if (event.target.classList.contains('to-cook-button')) {
-      debugger
     event.target.src = "../assets/selected-chef-hat.svg";
     event.target.classList.add('gray-cook-button');
     event.target.classList.remove('to-cook-button');
@@ -405,7 +405,7 @@ function resetSearch() {
   } else if (event.target.classList.contains('reset-button') && recipesToCookButton.classList.contains('inactive')) {
     allRecipes.innerHTML = '';
     displayRecipesToCook();
-  } else {
+  } else if (event.target.classList.contains('reset-button')) {
     allRecipes.innerHTML = '';
     displayAllRecipes();
   }
