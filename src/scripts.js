@@ -127,9 +127,9 @@ function displayRecipeCard(event) {
                     </ul>
                     <div class="recipe-cost">Cost: $${recipe.ingredients.reduce((totalCost, currentIngredient) => {
                         return totalCost += currentIngredient.cost;
-                    }, 0)}</div>
+                    }, 0).toFixed(2)}</div>
                     </div>
-                    <div class="recipe-instructions">Instructions: <ul> ${recipe.instructions.map(instruction => {return `${instruction.number}: ${instruction.instruction}`+ "<br />"}).join('')}</ul></div>
+                    <div class="recipe-instructions">Instructions: <ul> ${recipe.instructions.map(instruction => {return `${instruction.number}: ${instruction.instruction}`+ "<br />"+ "<br />"}).join('')}</ul></div>
                     </div>
                     <button class="check-stock-button pink-button not-clicked ${recipe.id}">Check Pantry Stock</button>
                     </div>`
