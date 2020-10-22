@@ -1836,7 +1836,7 @@ const recipeData = [
   },
   {
     "id": 793584,
-    "image": "https://spoonacular.com/recipeImages/793584-556x370.jpg",
+    "image": "https://www.cookingclassy.com/wp-content/uploads/2018/04/greek-potato-salad-8.jpg",
     "ingredients": [
       {
         "id": 11143,
