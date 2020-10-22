@@ -67,8 +67,8 @@ function displayAllRecipes() {
               </div>
               <h4 class="recipe-name">${recipe.name}</h4>
               <div class="recipe-card-buttons">
-              <img src="../assets/red-heart-icon.jpg" class="red-heart-button ${recipe.id}">
-              <img src="../assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
+              <img src="./assets/red-heart-icon.jpg" class="red-heart-button ${recipe.id}">
+              <img src="./assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
                   <br>
               </div>
             </article>`
@@ -81,8 +81,8 @@ function displayAllRecipes() {
           </div>
           <h4 class="recipe-name">${recipe.name}</h4>
           <div class="recipe-card-buttons">
-          <img src="../assets/heart-regular.svg" class="heart-button ${recipe.id}">
-          <img src="../assets/selected-chef-hat.svg" class="to-cook-button ${recipe.id}">
+          <img src="./assets/heart-regular.svg" class="heart-button ${recipe.id}">
+          <img src="./assets/selected-chef-hat.svg" class="to-cook-button ${recipe.id}">
               <br>
           </div>
         </article>`
@@ -95,8 +95,8 @@ function displayAllRecipes() {
         </div>
         <h4 class="recipe-name">${recipe.name}</h4>
         <div class="recipe-card-buttons">
-        <img src="../assets/heart-regular.svg" class="heart-button ${recipe.id}">
-        <img src="../assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
+        <img src="./assets/heart-regular.svg" class="heart-button ${recipe.id}">
+        <img src="./assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
             <br>
         </div>
       </article>`
@@ -159,7 +159,7 @@ function displayFavorites() {
   allRecipes.insertAdjacentHTML('beforeend', recipeCard);
 })
   } else {
-      allRecipes.insertAdjacentHTML('beforeend', `<p class="no-recipe-message">No favorite recipes to display at this time! Click on the  <img src="../assets/heart-regular.svg" class="to-cook-button2">  icon to add a recipe!</p>`);
+      allRecipes.insertAdjacentHTML('beforeend', `<p class="no-recipe-message">No favorite recipes to display at this time! Click on the  <img src="./assets/heart-regular.svg" class="to-cook-button2">  icon to add a recipe!</p>`);
     }
   }
 
@@ -186,7 +186,7 @@ function displayRecipesToCook() {
     allRecipes.insertAdjacentHTML('beforeend', recipeCard);
     })
   } else {
-      allRecipes.insertAdjacentHTML('beforeend', `<p class="no-recipe-message">No recipes selected to cook at this time! Click on the  <img src="../assets/unselected-chef-hat.svg" class="to-cook-button2">  icon to add a recipe!</p>`);
+      allRecipes.insertAdjacentHTML('beforeend', `<p class="no-recipe-message">No recipes selected to cook at this time! Click on the  <img src="./assets/unselected-chef-hat.svg" class="to-cook-button2">  icon to add a recipe!</p>`);
     }
 }
 
@@ -231,7 +231,7 @@ function displayHomePage() {
 
 function toggleFavoriteIcon(event) {
     if (event.target.classList.contains('heart-button')) {
-    event.target.src = "../assets/red-heart-icon.jpg";
+    event.target.src = "./assets/red-heart-icon.jpg";
     event.target.classList.add('red-heart-button');
     event.target.classList.remove('heart-button');
     potentialRecipes.forEach(recipe => {
@@ -241,7 +241,7 @@ function toggleFavoriteIcon(event) {
         }
     })
   } else if (event.target.classList.contains('red-heart-button')) {
-    event.target.src = "../assets/heart-regular.svg";
+    event.target.src = "./assets/heart-regular.svg";
     event.target.classList.add('heart-button');
     event.target.classList.remove('red-heart-button');
     potentialRecipes.forEach(recipe => {
@@ -255,7 +255,7 @@ function toggleFavoriteIcon(event) {
 
 function toggleToCookIcon(event) {
     if (event.target.classList.contains('to-cook-button')) {
-    event.target.src = "../assets/selected-chef-hat.svg";
+    event.target.src = "./assets/selected-chef-hat.svg";
     event.target.classList.add('gray-cook-button');
     event.target.classList.remove('to-cook-button');
     potentialRecipes.forEach(recipe => {
@@ -265,7 +265,7 @@ function toggleToCookIcon(event) {
         }
     })
   } else if (event.target.classList.contains('gray-cook-button')) {
-    event.target.src = "../assets/unselected-chef-hat.svg";
+    event.target.src = "./assets/unselected-chef-hat.svg";
     event.target.classList.add('to-cook-button');
     event.target.classList.remove('gray-cook-button');
     potentialRecipes.forEach(recipe => {
@@ -333,8 +333,8 @@ function displaySearchResults(searchMethod, formValue, recipesArray) {
         </div>
         <h4 class="recipe-name">${recipe.name}</h4>
         <div class="recipe-card-buttons">
-          <img src="../assets/heart-regular.svg" class="heart-button ${recipe.id}">
-          <img src="../assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
+          <img src="./assets/heart-regular.svg" class="heart-button ${recipe.id}">
+          <img src="./assets/unselected-chef-hat.svg" class="to-cook-button ${recipe.id}">
           <br>
         </div>
       </article>`
