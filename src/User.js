@@ -1,5 +1,3 @@
-
-
 class User {
   constructor(name, id, pantry) {
     this.name = name;
@@ -9,18 +7,18 @@ class User {
     this.recipesToCook = [];
   }
   addToFavorites(recipe) {
-      this.favoriteRecipes.push(recipe);
+    this.favoriteRecipes.push(recipe);
   }
   removeFromFavorites(recipe) {
-      let recipeIndex = this.favoriteRecipes.indexOf(recipe);
-      this.favoriteRecipes.splice(recipeIndex, 1);
+    let recipeIndex = this.favoriteRecipes.indexOf(recipe);
+    this.favoriteRecipes.splice(recipeIndex, 1);
   }
   addToRecipesToCook(recipe) {
-      this.recipesToCook.push(recipe);
+    this.recipesToCook.push(recipe);
   }
   removeFromRecipesToCook(recipe) {
-      let recipeIndex = this.favoriteRecipes.indexOf(recipe);
-      this.recipesToCook.splice(recipeIndex, 1);
+    let recipeIndex = this.favoriteRecipes.indexOf(recipe);
+    this.recipesToCook.splice(recipeIndex, 1);
   }
   filterRecipeByTag(recipes, tagName) {
    return recipes.filter(recipe => {
@@ -30,17 +28,17 @@ class User {
    searchRecipeByIngredient(recipes, keyword) {
     let keywordID;
     ingredientsData.forEach(ingredient => {
-        if (keyword === ingredient.name) {
-            keywordID = ingredient.id;
-        }
-    })
+      if (keyword === ingredient.name) {
+        keywordID = ingredient.id;
+      }
+  })
     let filteredRecipes = [];
     recipes.forEach(recipe => {
-        recipe.ingredients.forEach(ingredient => {
-            if (ingredient.id === keywordID) {
-                filteredRecipes.push(recipe);
-            }
-        })
+      recipe.ingredients.forEach(ingredient => {
+        if (ingredient.id === keywordID) {
+          filteredRecipes.push(recipe);
+        }
+      })
     })
     return filteredRecipes;
    }

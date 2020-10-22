@@ -2,14 +2,13 @@
 
 class Recipe {
     constructor(id, image, ingredients, instructions, name, tags) {
-        this.id = id;
-        this.image = image;
-        this.ingredients = ingredients;
-        this.instructions = instructions;
-        this.name = name;
-        this.tags = tags;
+      this.id = id;
+      this.image = image;
+      this.ingredients = ingredients;
+      this.instructions = instructions;
+      this.name = name;
+      this.tags = tags;
     }
-
     getIngredients(recipe) {
       recipe.ingredients.forEach(ingredient => {
         const id = ingredient.id;
