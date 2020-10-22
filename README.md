@@ -2,7 +2,7 @@
 
 ## Our Site
 
->[Deployed GitHub Pages Site](https://jdxsmith.github.io/whats-cookin/)
+>[Deployed GitHub Pages Site](https://alyssabull.github.io/whats-cookin/)
 
 ## Project Specs and Rubric
 
